@@ -31,22 +31,6 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false,
       },
-      address_id: {
-        type: Sequelize.UUID,
-        allowNull: false,
-        references: {
-          model: 'address',
-          key: 'id',
-        },
-      },
-      user_id: {
-        type: Sequelize.UUID,
-        allowNull: false,
-        references: {
-          model: 'user',
-          key: 'id',
-        },
-      },
       created_at: {
         allowNull: false,
         type: Sequelize.DATE,

@@ -30,14 +30,6 @@ module.exports = {
         type: Sequelize.DOUBLE,
         allowNull: false,
       },
-      vendor_id: {
-        type: Sequelize.UUID,
-        allowNull: false,
-        references: {
-          model: 'vendor',
-          key: 'id',
-        },
-      },
       created_at: {
         allowNull: false,
         type: Sequelize.DATE,

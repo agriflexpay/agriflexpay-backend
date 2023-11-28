@@ -8,13 +8,6 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.UUID
       },
-      user_uuid: {
-        type: Sequelize.UUID,
-        references: {
-          model: 'user',
-          ref: 'id'
-        }
-      },
       rights: {
         type: Sequelize.JSONB
       },

@@ -35,14 +35,7 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false,
       },
-      address_id: {
-        type: Sequelize.UUID,
-        allowNull: false,
-        references: {
-          model: 'address',
-          key: 'id',
-        },
-      },
+      
       role: {
         type: Sequelize.STRING,
         allowNull: false,
