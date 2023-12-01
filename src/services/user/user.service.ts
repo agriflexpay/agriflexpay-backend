@@ -8,6 +8,7 @@ const User = sequelize_instance.models.user;
 interface UserInterface extends User_type { }
 class UserService {
     static async create({ ...user }: UserInterface) {
+      try{
         const created_at = new Date();
         const updated_at = new Date();
         const data =
@@ -19,25 +20,33 @@ class UserService {
         console.log(data);
         const _user = await User.create(data);
         return omit(_user.toJSON(), "password");
+      }
+        catch(error){
+            return false;
+        }
     }
 
     static async update({ id, ...user }: UserInterface) {
-        const updated_at = new Date()
-        const data =
-        {
-            ...user,
-            updated_at
-        }
-        const _user = await User.update(
-            data,
+        try{
+            const updated_at = new Date()
+            const data =
             {
-                where: {
-                    id: id
-                }
+                ...user,
+                updated_at
             }
-        );
-
-        return _user;
+            const _user = await User.update(
+                data,
+                {
+                    where: {
+                        id: id
+                    }
+                }
+            );
+    
+            return _user;
+        }catch(error){
+            return false;
+        }
     }
 
     static async fetch({ id }: UserInterface) {

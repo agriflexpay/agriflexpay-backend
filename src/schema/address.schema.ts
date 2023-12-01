@@ -27,4 +27,6 @@ const addressSchema = object(
         })
     })
 
+export default addressSchema;
+
 export type CreateAddressInput = TypeOf<typeof addressSchema>;

@@ -19,11 +19,12 @@ export interface User_type {
     updatedAt?: Date
 }
 
-export interface  Address {
+export interface  Address_type {
      id?: string
      county?: string
      subcounty?: string
      location?: string
+     user_id?: string
      sublocation?: string
      phone?: number
      createdAt?: Date
@@ -79,13 +80,29 @@ export interface Payment {
     updatedAt?: Date
 }
 
-export interface Vendor {
+export interface Agency_type{
     id?: string
     name?: string
     email?: string
     description?: string
     phone?: number
     address_id?: string
+    createdAt?: Date
+    updatedAt?: Date
+}
+
+export interface Disease_type{
+    id?: string
+    name?: string
+    occurance_pattern?: string
+    causes?: [string]
+    prevention_and_control?: [string]
+    transmission?: [string]
+    signs_and_symptoms?: [string]
+    treatment?: [string]
+    victim?: [string]
+    location_id?: string
+    farmer_id?: string
     createdAt?: Date
     updatedAt?: Date
 }

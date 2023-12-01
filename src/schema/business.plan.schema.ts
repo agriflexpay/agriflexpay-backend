@@ -1,6 +1,6 @@
 import {number, object, string, TypeOf } from "zod";
 
-const businessPlanSchema = object(
+export const businessPlanSchema = object(
     {
         body: object({
             name: string({
@@ -30,5 +30,7 @@ const businessPlanSchema = object(
             required_error: "Business Plan ID required"
         })
     })
+
+
 
 export type CreateBusinessPlanInput = TypeOf<typeof businessPlanSchema>;

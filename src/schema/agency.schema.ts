@@ -1,6 +1,6 @@
 import {number, object, string, TypeOf } from "zod";
 
-export const vendorSchema = object(
+export const agencySchema = object(
     {
         body: object(
             {
@@ -30,4 +30,4 @@ export const params = object({
     })
 })
 
-export type CreateVendorInput = TypeOf<typeof vendorSchema>;
+export type CreateVendorInput = TypeOf<typeof agencySchema>;
