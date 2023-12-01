@@ -28,16 +28,15 @@ readdirSync(__dirname)
     return (
       file.indexOf('.') !== 0 &&
       file !== basename &&
-      file.slice(-3) === '.js' &&
+      file.slice(-3) === '.ts' &&
       file.indexOf('.test.js') === -1
     );
   })
   .forEach(file => {
-    console.log(file)
     const modelModule = require(join(__dirname, file));
     const obj = modelModule.default;
-    const model = obj(sequelize_instance, DataTypes);
-    db[model.name] = model;
+    const model = obj(sequelize_instance);
+    db[model.name] = model
   });
 
 Object.keys(db).forEach(modelName => {

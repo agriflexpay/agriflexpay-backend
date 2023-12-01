@@ -59,7 +59,10 @@ const disease = (sequelize) => {
             allowNull: false,
         }
     }, {
-        sequelize: sequelize, tableName: "disease"
+        sequelize: sequelize,
+        modelName: "disease",
+        tableName: "Disease"
     });
+    return Diseace;
 };
 exports.default = disease;

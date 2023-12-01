@@ -72,8 +72,11 @@ const disease = (sequelize: Sequelize) => {
         }
     },
         {
-            sequelize: sequelize, tableName: "disease"
+            sequelize: sequelize,
+             modelName: "disease",
+             tableName: "Disease"
         }
     )
+    return Diseace
 }
 export default disease

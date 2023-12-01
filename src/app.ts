@@ -29,8 +29,7 @@ const sequelize_auth = async (req: Request, res:Response, next: NextFunction) =>
 }
 
 app.use(sequelize_auth)
-
-
+console.log(sequelize_instance.models)
 app.listen(port, () => {
   logger.info(`Server running on port ${port}`)
   userRoutes(app)

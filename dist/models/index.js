@@ -48,10 +48,10 @@ exports.db = {
         file.indexOf('.test.js') === -1);
 })
     .forEach(file => {
-    console.log(file);
     const modelModule = require((0, path_1.join)(__dirname, file));
     const obj = modelModule.default;
-    const model = obj(exports.sequelize_instance, sequelize_1.DataTypes);
+    const model = obj(exports.sequelize_instance);
+    console.log(model);
     exports.db[model.name] = model;
 });
 Object.keys(exports.db).forEach(modelName => {

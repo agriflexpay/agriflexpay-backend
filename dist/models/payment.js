@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const sequelize_1 = require("sequelize");
-const Payment = (sequelize) => {
+const payment = (sequelize) => {
     class Payment extends sequelize_1.Model {
     }
     Payment.init({
@@ -18,7 +18,7 @@ const Payment = (sequelize) => {
             allowNull: false,
         },
         user_id: {
-            type: sequelize_1.DataTypes.STRING,
+            type: sequelize_1.DataTypes.UUID,
             allowNull: false,
             references: {
                 model: "user",
@@ -26,7 +26,7 @@ const Payment = (sequelize) => {
             },
         },
         plan_id: {
-            type: sequelize_1.DataTypes.STRING,
+            type: sequelize_1.DataTypes.UUID,
             allowNull: false,
             references: {
                 model: "plan",
@@ -34,7 +34,7 @@ const Payment = (sequelize) => {
             },
         },
         vendor_id: {
-            type: sequelize_1.DataTypes.STRING,
+            type: sequelize_1.DataTypes.UUID,
             allowNull: false,
             references: {
                 model: "vendor",
@@ -59,8 +59,9 @@ const Payment = (sequelize) => {
         }
     }, {
         sequelize,
-        tableName: "payment"
+        modelName: "payment",
+        tableName: "Payment"
     });
     return Payment;
 };
-exports.default = Payment;
+exports.default = payment;

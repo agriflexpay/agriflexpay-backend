@@ -5,9 +5,9 @@ import { Response } from "express";
 import { verifyToken } from "../../utils/jwt.utls";
 import { get } from "lodash";
 import logger from "../../funct/logger";
-import {User} from "../../types/type"
+import {User_type} from "../../types/type"
 
-interface UserInterface extends User { }
+interface UserInterface extends User_type { }
 const privateKey =process.env.PRIVATE_KEY
 const publicKey =process.env.PUBLIC_KEY  
 

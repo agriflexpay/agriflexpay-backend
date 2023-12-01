@@ -1,8 +1,7 @@
 import { Sequelize,DataTypes,Model  } from "sequelize";
 
-import { } from "sequelize-typescript";
 
-const Payment=(sequelize: Sequelize) => {
+const payment=(sequelize: Sequelize) => {
     class Payment extends Model{
         public code?: string
         public amount?: number
@@ -29,7 +28,7 @@ const Payment=(sequelize: Sequelize) => {
             allowNull: false,
         },
         user_id: {
-            type: DataTypes.STRING,
+            type: DataTypes.UUID,
             allowNull: false,
             references: {
                 model: "user",
@@ -37,7 +36,7 @@ const Payment=(sequelize: Sequelize) => {
             },
         },
         plan_id: {
-            type: DataTypes.STRING,
+            type: DataTypes.UUID,
             allowNull: false,
             references: {
                 model: "plan",
@@ -45,10 +44,10 @@ const Payment=(sequelize: Sequelize) => {
             },
         },
         vendor_id: {
-            type: DataTypes.STRING,
+            type: DataTypes.UUID,
             allowNull: false,
             references: {
-                model: "vendor",
+                model: "agency",
                 key: "id",
             },
         },
@@ -71,9 +70,10 @@ const Payment=(sequelize: Sequelize) => {
         
     },{
         sequelize,
-        tableName: "payment"
+        modelName:"payment",
+        tableName:"Payment"
     })
 
     return Payment
 }
-export default Payment
+export default payment

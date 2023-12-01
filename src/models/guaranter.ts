@@ -1,6 +1,6 @@
 import { Sequelize,DataTypes,Model } from "sequelize";
 
-const Guaranter=(sequelize: Sequelize) => {
+const guaranter=(sequelize: Sequelize) => {
     class Guaranter extends Model{
         public id?: string
         public fname?: string
@@ -66,9 +66,10 @@ const Guaranter=(sequelize: Sequelize) => {
 
     },{
         sequelize,
-        tableName: "guaranter"
+        modelName: "guaranter",
+        tableName: "Guaranter"
     })
 return Guaranter
 }
 
-export default Guaranter
+export default guaranter

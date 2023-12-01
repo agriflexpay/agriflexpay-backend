@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const sequelize_1 = require("sequelize");
-const Guaranter = (sequelize) => {
+const guaranter = (sequelize) => {
     class Guaranter extends sequelize_1.Model {
     }
     Guaranter.init({
@@ -56,8 +56,9 @@ const Guaranter = (sequelize) => {
         }
     }, {
         sequelize,
-        tableName: "guaranter"
+        modelName: "guaranter",
+        tableName: "Guaranter"
     });
     return Guaranter;
 };
-exports.default = Guaranter;
+exports.default = guaranter;

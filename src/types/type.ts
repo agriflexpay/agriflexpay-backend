@@ -1,4 +1,4 @@
-export interface User {
+export interface User_type {
     id?: string
     fname?: string
     lname?: string

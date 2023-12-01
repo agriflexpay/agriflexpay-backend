@@ -1,7 +1,7 @@
 import { Sequelize, DataTypes, Model} from "sequelize";
 
-const Vendor = (sequelize: Sequelize) => {
-    class Vendor extends Model {
+const agency = (sequelize: Sequelize) => {
+    class Agency extends Model {
         public id?: string
         public name?: string
         public email?: string
@@ -12,10 +12,9 @@ const Vendor = (sequelize: Sequelize) => {
         public updatedAt?: Date
     }
 
-    Vendor.init({
+    Agency.init({
         id: {
             type: DataTypes.UUID,
-            defaultValue: DataTypes.UUIDV4,
             primaryKey: true,
             allowNull: false,
         },
@@ -45,10 +44,10 @@ const Vendor = (sequelize: Sequelize) => {
         },
     }, {
         sequelize:sequelize,
-        modelName: "vendor",
-        tableName: "vendor",
+        modelName: "agency",
+        tableName: "Agency",
     })
-    return Vendor
+    return Agency
 }
 
-export default Vendor
+export default agency

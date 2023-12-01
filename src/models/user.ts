@@ -1,9 +1,9 @@
-import { Sequelize , Model, } from "sequelize"
+import { Sequelize , Model, DataTypes} from "sequelize"
 import { hashPassword } from "../funct/password"
 import { BeforeCreate } from "sequelize-typescript";
 
-const User=(sequelize: Sequelize,DataTypes) => {
-    class user extends Model {
+const user=(sequelize: Sequelize) => {
+    class User extends Model {
        public id?: string
        public fname?: string
        public lname?: string
@@ -25,17 +25,16 @@ const User=(sequelize: Sequelize,DataTypes) => {
        public updatedAt?: Date
 
     @BeforeCreate
-    static async hashPassword(instance: user) {
+    static async hashPassword(instance: User) {
         const password = instance.dataValues.password
         instance.password = await hashPassword({password})
        
     }
     }
-    user.init({
+    User.init({
         id: {
             primaryKey: true,
-            type: DataTypes.UUID,
-            defaultValue: DataTypes.UUIDV4,
+            type: DataTypes.UUID, 
         },
         fname: {
             type: DataTypes.STRING,
@@ -50,7 +49,7 @@ const User=(sequelize: Sequelize,DataTypes) => {
             allowNull: false,
         },
         national_id: {
-            type: DataTypes.NUMBER,
+            type: DataTypes.INTEGER,
             allowNull: false,
         },
         krapin: {
@@ -74,7 +73,7 @@ const User=(sequelize: Sequelize,DataTypes) => {
             allowNull: false,
         },
         phone:{
-            type: DataTypes.NUMBER,
+            type: DataTypes.INTEGER,
             allowNull: false,
         },
         reset_token: {
@@ -124,10 +123,10 @@ const User=(sequelize: Sequelize,DataTypes) => {
      },{
         sequelize,
         modelName: "user",
-        tableName: "user",
+        tableName: "User",
      }
       )
-     return user
+     return User
 }    
 
-export default User
+export default user

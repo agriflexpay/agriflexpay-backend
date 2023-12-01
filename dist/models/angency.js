@@ -1,13 +1,12 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const sequelize_1 = require("sequelize");
-const Vendor = (sequelize) => {
-    class Vendor extends sequelize_1.Model {
+const agency = (sequelize) => {
+    class Agency extends sequelize_1.Model {
     }
-    Vendor.init({
+    Agency.init({
         id: {
             type: sequelize_1.DataTypes.UUID,
-            defaultValue: sequelize_1.DataTypes.UUIDV4,
             primaryKey: true,
             allowNull: false,
         },
@@ -37,9 +36,9 @@ const Vendor = (sequelize) => {
         },
     }, {
         sequelize: sequelize,
-        modelName: "vendor",
-        tableName: "vendor",
+        modelName: "agency",
+        tableName: "Agency",
     });
-    return Vendor;
+    return Agency;
 };
-exports.default = Vendor;
+exports.default = agency;

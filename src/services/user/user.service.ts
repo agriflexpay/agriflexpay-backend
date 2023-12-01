@@ -1,19 +1,35 @@
 
 import { omit } from "lodash";
-import {User} from "../../types/type"
+import {User_type} from "../../types/type"
 import sequelize_instance from "../../models/index";
 import { comparePassword } from "../../funct/password";
+
 const User = sequelize_instance.models.user;
-interface UserInterface extends User { }
+interface UserInterface extends User_type { }
 class UserService {
     static async create({ ...user }: UserInterface) {
-        const _user = await User.create(user);
+        const created_at = new Date();
+        const updated_at = new Date();
+        const data =
+        {
+            ...user,
+            created_at,
+            updated_at
+        }
+        console.log(data);
+        const _user = await User.create(data);
         return omit(_user.toJSON(), "password");
     }
 
     static async update({ id, ...user }: UserInterface) {
+        const updated_at = new Date()
+        const data =
+        {
+            ...user,
+            updated_at
+        }
         const _user = await User.update(
-            user,
+            data,
             {
                 where: {
                     id: id

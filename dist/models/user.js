@@ -21,8 +21,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const sequelize_1 = require("sequelize");
 const password_1 = require("../funct/password");
 const sequelize_typescript_1 = require("sequelize-typescript");
-const User = (sequelize, DataTypes) => {
-    class user extends sequelize_1.Model {
+const user = (sequelize) => {
+    class User extends sequelize_1.Model {
         static hashPassword(instance) {
             return __awaiter(this, void 0, void 0, function* () {
                 const password = instance.dataValues.password;
@@ -33,41 +33,40 @@ const User = (sequelize, DataTypes) => {
     __decorate([
         sequelize_typescript_1.BeforeCreate,
         __metadata("design:type", Function),
-        __metadata("design:paramtypes", [user]),
+        __metadata("design:paramtypes", [User]),
         __metadata("design:returntype", Promise)
-    ], user, "hashPassword", null);
-    user.init({
+    ], User, "hashPassword", null);
+    User.init({
         id: {
             primaryKey: true,
-            type: DataTypes.UUID,
-            defaultValue: DataTypes.UUIDV4,
+            type: sequelize_1.DataTypes.UUID,
         },
         fname: {
-            type: DataTypes.STRING,
+            type: sequelize_1.DataTypes.STRING,
             allowNull: false,
         },
         lname: {
-            type: DataTypes.STRING,
+            type: sequelize_1.DataTypes.STRING,
             allowNull: false,
         },
         email: {
-            type: DataTypes.STRING,
+            type: sequelize_1.DataTypes.STRING,
             allowNull: false,
         },
         national_id: {
-            type: DataTypes.NUMBER,
+            type: sequelize_1.DataTypes.INTEGER,
             allowNull: false,
         },
         krapin: {
-            type: DataTypes.STRING,
+            type: sequelize_1.DataTypes.STRING,
             allowNull: false,
         },
         password: {
-            type: DataTypes.STRING,
+            type: sequelize_1.DataTypes.STRING,
             allowNull: false,
         },
         address_id: {
-            type: DataTypes.UUID,
+            type: sequelize_1.DataTypes.UUID,
             allowNull: false,
             references: {
                 model: "address",
@@ -75,60 +74,60 @@ const User = (sequelize, DataTypes) => {
             },
         },
         role: {
-            type: DataTypes.STRING,
+            type: sequelize_1.DataTypes.STRING,
             allowNull: false,
         },
         phone: {
-            type: DataTypes.NUMBER,
+            type: sequelize_1.DataTypes.INTEGER,
             allowNull: false,
         },
         reset_token: {
-            type: DataTypes.STRING,
+            type: sequelize_1.DataTypes.STRING,
             allowNull: true,
         },
         reset_token_expires: {
-            type: DataTypes.DATE,
+            type: sequelize_1.DataTypes.DATE,
             allowNull: true,
         },
         is_active: {
-            type: DataTypes.BOOLEAN,
+            type: sequelize_1.DataTypes.BOOLEAN,
             allowNull: false,
             defaultValue: false,
         },
         is_account_verified: {
-            type: DataTypes.BOOLEAN,
+            type: sequelize_1.DataTypes.BOOLEAN,
             allowNull: false,
             defaultValue: false,
         },
         verification_token: {
-            type: DataTypes.STRING,
+            type: sequelize_1.DataTypes.STRING,
             allowNull: true,
         },
         verification_token_expires: {
-            type: DataTypes.DATE,
+            type: sequelize_1.DataTypes.DATE,
             allowNull: true,
         },
         created_at: {
-            type: DataTypes.DATE,
+            type: sequelize_1.DataTypes.DATE,
             allowNull: false,
         },
         updated_at: {
-            type: DataTypes.DATE,
+            type: sequelize_1.DataTypes.DATE,
             allowNull: false,
         },
         latitude: {
-            type: DataTypes.STRING,
+            type: sequelize_1.DataTypes.STRING,
             allowNull: true,
         },
         longitude: {
-            type: DataTypes.STRING,
+            type: sequelize_1.DataTypes.STRING,
             allowNull: true,
         },
     }, {
         sequelize,
         modelName: "user",
-        tableName: "user",
+        tableName: "User",
     });
-    return user;
+    return User;
 };
-exports.default = User;
+exports.default = user;

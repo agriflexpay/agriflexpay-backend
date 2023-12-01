@@ -31,6 +31,7 @@ class UserService {
     static create(_a) {
         var user = __rest(_a, []);
         return __awaiter(this, void 0, void 0, function* () {
+            console.log(index_1.default.models);
             const _user = yield User.create(user);
             return (0, lodash_1.omit)(_user.toJSON(), "password");
         });

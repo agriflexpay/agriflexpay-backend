@@ -8,7 +8,6 @@ const address = (sequelize) => {
         id: {
             primaryKey: true,
             type: sequelize_1.DataTypes.UUID,
-            defaultValue: sequelize_1.DataTypes.UUIDV4,
         },
         county: {
             type: sequelize_1.DataTypes.STRING,
@@ -40,7 +39,8 @@ const address = (sequelize) => {
         }
     }, {
         sequelize: sequelize,
-        tableName: "address"
+        tableName: "address",
+        modelName: "Address",
     });
     return Address;
 };

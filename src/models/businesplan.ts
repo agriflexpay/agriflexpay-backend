@@ -1,6 +1,6 @@
 import { Sequelize,DataTypes, Model  } from "sequelize";
 
-const Plan  = (sequelize: Sequelize) => {
+const plan  = (sequelize: Sequelize) => {
      class Plan extends Model {
         public id?: string
         public name?: string
@@ -17,7 +17,6 @@ const Plan  = (sequelize: Sequelize) => {
         id: {
             primaryKey: true,
             type: DataTypes.UUID,
-            defaultValue: DataTypes.UUIDV4,
         },
         name: {
             type: DataTypes.STRING,
@@ -32,7 +31,7 @@ const Plan  = (sequelize: Sequelize) => {
             allowNull: false,
         },
         duration: {
-            type: DataTypes.INTEGER,
+            type: DataTypes.DOUBLE,
             allowNull: false,
         },
         interest_rate: {
@@ -43,7 +42,7 @@ const Plan  = (sequelize: Sequelize) => {
             type: DataTypes.UUID,
             allowNull: false,
             references: {
-                model: "vendor",
+                model: "agency",
                 key: "id",
             },
         },
@@ -59,8 +58,9 @@ const Plan  = (sequelize: Sequelize) => {
 }, {
     sequelize: sequelize,
     modelName: "plan",
+    tableName: "Plan",
 })
 return Plan
 }
 
-export default Plan
+export default plan

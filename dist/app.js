@@ -39,6 +39,7 @@ const sequelize_auth = (req, res, next) => __awaiter(void 0, void 0, void 0, fun
     }
 });
 app.use(sequelize_auth);
+console.log(index_1.default);
 app.listen(port, () => {
     logger_1.default.info(`Server running on port ${port}`);
     (0, user_1.default)(app);
