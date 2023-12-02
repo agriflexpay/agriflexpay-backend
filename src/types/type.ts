@@ -43,7 +43,7 @@ export interface Business_plan {
     updatedAt?: Date
 }
 
-export interface Guarantor {
+export interface Guarantor_type {
     id?: string
     fname?: string
     lname?: string
