@@ -1,7 +1,7 @@
 import e, { Express } from "express";
 import BusinessPlanController from "../controllers/businessplan.ctr";
-import { requireUser } from "@/middleware/requireUser";
-import { businessPlanSchema } from "@/schema/business.plan.schema";
+import { requireUser } from "../middleware/requireUser";
+import { businessPlanSchema } from "../schema/business.plan.schema";
 import validate from "../middleware/validate";
 
 const routes = (app: Express) => {

@@ -1,6 +1,4 @@
 import { Sequelize , Model, DataTypes} from "sequelize"
-import { hashPassword } from "../funct/password"
-import { BeforeCreate } from "sequelize-typescript";
 
 const user=(sequelize: Sequelize) => {
     class User extends Model {
@@ -24,17 +22,17 @@ const user=(sequelize: Sequelize) => {
        public createdAt?: Date
        public updatedAt?: Date
 
-    @BeforeCreate
-    static async hashPassword(instance: User) {
-        const password = instance.dataValues.password
-        instance.password = await hashPassword({password})
+    // @BeforeCreate
+    // static async hashedPassword(instance: User) {
+    //     const password = instance.dataValues.password
+    //     instance.password = await hashPassword({password})
        
-    }
+    // }
     }
     User.init({
         id: {
             primaryKey: true,
-            type: DataTypes.UUID, 
+            type: DataTypes.STRING(100), 
         },
         fname: {
             type: DataTypes.STRING,
@@ -51,10 +49,12 @@ const user=(sequelize: Sequelize) => {
         national_id: {
             type: DataTypes.INTEGER,
             allowNull: false,
+            unique:true
         },
         krapin: {
             type: DataTypes.STRING,
             allowNull: false,
+            unique:true
         },
         password: {
             type: DataTypes.STRING,
@@ -73,7 +73,7 @@ const user=(sequelize: Sequelize) => {
             allowNull: false,
         },
         phone:{
-            type: DataTypes.INTEGER,
+            type: DataTypes.STRING,
             allowNull: false,
         },
         reset_token: {
@@ -101,14 +101,6 @@ const user=(sequelize: Sequelize) => {
         verification_token_expires: {
             type: DataTypes.DATE,
             allowNull: true,
-        },
-        created_at: {
-            type: DataTypes.DATE,
-            allowNull: false,
-        },
-        updated_at: {
-            type: DataTypes.DATE,
-            allowNull: false,
         },
         latitude: {
             type: DataTypes.STRING,

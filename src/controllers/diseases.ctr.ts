@@ -1,6 +1,6 @@
 import { Request,Response } from "express";
 import DiseasesService  from "../services/diseases/index";
-import ResponseService from "@/funct/responce";
+import ResponseService from "../funct/responce";
 
 export class DiseasesController {
     static async create(req: Request, res: Response) {

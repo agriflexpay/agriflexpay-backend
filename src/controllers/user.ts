@@ -10,7 +10,7 @@ class UserController {
         try {
             const user = await UserService.create(req.body);
 
-            return TokenService.generateToken({ user, res })
+            return TokenService.generateToken({ user:user, res })
         } catch (error) {
             return ResponseService.error({ res, error });
         }

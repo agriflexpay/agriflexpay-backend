@@ -6,11 +6,12 @@ import { verifyToken } from "../../utils/jwt.utls";
 import { get } from "lodash";
 import logger from "../../funct/logger";
 import {User_type} from "../../types/type"
+import fs from "fs"
 
 interface UserInterface extends User_type { }
-const privateKey =process.env.PRIVATE_KEY
-const publicKey =process.env.PUBLIC_KEY  
-
+//const privateKey =process.env.PRIVATE_KEY
+const publicKey = fs.readFileSync(__dirname + '/public_key.pem', 'utf8'); 
+const privateKey = fs.readFileSync(__dirname + '/private_key.pem', 'utf8');
 export default class TokenService {
     static async decode(token: string) {
         try {
@@ -26,24 +27,24 @@ export default class TokenService {
     static async sign(data: Object,) {
         try {
 
-            const authToken = jwt.sign(
+            const authToken =await jwt.sign(
                 { data },
                 privateKey,
                 {
                     algorithm: "RS256",
-                    expiresIn: process.env.TokenExpiresIn
+                    expiresIn:'1h'
                 }
 
             );
 
 
 
-            const refreshToken = jwt.sign(
+            const refreshToken = await jwt.sign(
                 { data },
                 privateKey,
                 {
                     algorithm: "RS256",
-                    expiresIn: process.env.REFRESH_TOKEN_ExpiresIn
+                    expiresIn: '1d'
                 }
 
             );
@@ -79,7 +80,7 @@ export default class TokenService {
 
 
         } catch (error) {
-            logger.error(error);
+            logger.error(error)
             return null
         }
     }

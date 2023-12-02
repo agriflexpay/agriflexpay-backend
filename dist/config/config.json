@@ -2,7 +2,7 @@
     "development": {
       "username": "lutali",
       "password": "@123@123",
-      "database": "agri",
+      "database": "agriculture",
       "host": "127.0.0.1",
       "dialect": "postgres"
     },

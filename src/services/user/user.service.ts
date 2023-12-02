@@ -3,39 +3,36 @@ import { omit } from "lodash";
 import {User_type} from "../../types/type"
 import sequelize_instance from "../../models/index";
 import { comparePassword } from "../../funct/password";
-
+import log from "../../funct/logger";
+import  {generateUUID} from "../../funct/generateId"
+import {hashPassword} from "../../funct/password";
 const User = sequelize_instance.models.user;
 interface UserInterface extends User_type { }
 class UserService {
     static async create({ ...user }: UserInterface) {
       try{
-        const created_at = new Date();
-        const updated_at = new Date();
+        const tohashpassword = user?.password||''
         const data =
         {
             ...user,
-            created_at,
-            updated_at
+            id:generateUUID(),
+            password:await hashPassword({password:tohashpassword})
         }
-        console.log(data);
+        log.info(sequelize_instance.models);
         const _user = await User.create(data);
-        return omit(_user.toJSON(), "password");
+
+        const _data = {..._user.dataValues}
+        return omit(_data,"password","reset_token", "reset_token_expires","verification_token","verification_token_expires");
       }
         catch(error){
-            return false;
+            return error;
         }
     }
 
     static async update({ id, ...user }: UserInterface) {
         try{
-            const updated_at = new Date()
-            const data =
-            {
-                ...user,
-                updated_at
-            }
             const _user = await User.update(
-                data,
+               user,
                 {
                     where: {
                         id: id
@@ -45,18 +42,23 @@ class UserService {
     
             return _user;
         }catch(error){
-            return false;
+            return error;
         }
     }
 
     static async fetch({ id }: UserInterface) {
         const _user = await User.findByPk(id)
-        return omit(_user?.toJSON(), "password")
+        const _data = {..._user?.dataValues}
+        return omit(_data,"password","reset_token", "reset_token_expires","verification_token","verification_token_expires")
     }
 
     static async users() {
-        const users = await User.findAll();
-        return omit(users, "password");
+       try{
+        const _users = await User.findAll();
+        return _users?.map((user) =>user.dataValues )
+       }catch(error){
+           return error;
+       }
     }
 
     static async filter({ ...query }: UserInterface) {
@@ -64,9 +66,13 @@ class UserService {
 
         const _users = await User.findAll({
             where: condition,
-        });
-
-        return _users;
+        })
+        const users = _users.map((user) => {
+            const _users = { ...user.dataValues }
+            return omit(_users,"password","reset_token", "reset_token_expires","verification_token","verification_token_expires");
+        }
+        )
+        return users;
     }
 
     static async delete({ id }: UserInterface) {
@@ -97,8 +103,9 @@ class UserService {
         });
 
         if (!is_valid) return false;
+        const _user = {...user.dataValues}
 
-        return omit(user.toJSON(), "password");
+        return omit(_user,"password","reset_token", "reset_token_expires","verification_token","verification_token_expires");
     }
 
     static async avatar({url,id }: {url: string,id:string }) {
