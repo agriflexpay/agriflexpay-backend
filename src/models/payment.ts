@@ -56,7 +56,7 @@ const payment=(sequelize: Sequelize) => {
             allowNull: false,
         },
         phone:{
-            type: DataTypes.INTEGER,
+            type: DataTypes.STRING,
             allowNull: false,
             references: {
                 model: "user",

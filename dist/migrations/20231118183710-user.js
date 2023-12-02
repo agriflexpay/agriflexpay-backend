@@ -41,7 +41,7 @@ module.exports = {
         allowNull: false,
       },
       phone: {
-        type: Sequelize.INTEGER,
+        type: Sequelize.STRING,
         allowNull: false,
         unique: true,
       },
@@ -70,16 +70,6 @@ module.exports = {
       verification_token_expires: {
         type: Sequelize.DATE,
         allowNull: true,
-      },
-      created_at: {
-        allowNull: false,
-        type: Sequelize.DATE,
-        defaultValue: Sequelize.literal("CURRENT_TIMESTAMP")
-      },
-      updated_at: {
-        allowNull: false,
-        type: Sequelize.DATE,
-        defaultValue: Sequelize.literal("CURRENT_TIMESTAMP")
       },
       latitude: {
         type: Sequelize.STRING,

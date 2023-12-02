@@ -35,7 +35,7 @@ module.exports = {
     })
  
     await queryInterface.addColumn('payment','phone',{
-      type:Sequelize.INTEGER,
+      type:Sequelize.STRING,
       references:{
         model:"user",
         key:'phone'
