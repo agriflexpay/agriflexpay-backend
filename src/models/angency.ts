@@ -38,13 +38,13 @@ const agency = (sequelize: Sequelize) => {
             type: DataTypes.UUID,
             allowNull: false,
             references: {
-                model: "address",
+                model: "Address",
                 key: "id",
             },
         },
     }, {
         sequelize:sequelize,
-        modelName: "agency",
+        modelName: "Agency",
         tableName: "Agency",
     })
     return Agency

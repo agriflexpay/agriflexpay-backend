@@ -39,7 +39,7 @@ const address=(sequelize: Sequelize) => {
         }
     },{
         sequelize: sequelize,
-        tableName: "address",
+        tableName: "Address",
         modelName: "Address",
     })
 

@@ -73,7 +73,7 @@ const disease = (sequelize: Sequelize) => {
     },
         {
             sequelize: sequelize,
-             modelName: "disease",
+             modelName: "Disease",
              tableName: "Disease"
         }
     )

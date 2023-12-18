@@ -32,7 +32,7 @@ const user=(sequelize: Sequelize) => {
     User.init({
         id: {
             primaryKey: true,
-            type: DataTypes.STRING(100), 
+            type:DataTypes.UUID, 
         },
         fname: {
             type: DataTypes.STRING,
@@ -64,7 +64,7 @@ const user=(sequelize: Sequelize) => {
             type: DataTypes.UUID,
             allowNull: false,
             references: {
-                model: "address",
+                model: "Address",
                 key: "id",
             },
         },
@@ -114,7 +114,7 @@ const user=(sequelize: Sequelize) => {
     
      },{
         sequelize,
-        modelName: "user",
+        modelName: "User",
         tableName: "User",
      }
       )

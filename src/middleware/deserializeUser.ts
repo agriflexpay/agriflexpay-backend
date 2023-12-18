@@ -6,13 +6,13 @@ export const deserializeUser = async (req: Request, res: Response, next: NextFun
     const accessToken: any = get(req, "headers.x-access-token"); //.replace(/^Bearer\s/, "");
     const refreshToken: any = get(req, "headers.x-refresh");
 
-
+    
     if (!accessToken) {
         return next();
     }
 
     const { decoded, expired } = await verifyToken(accessToken);
-
+    
     if (decoded) {
         res.locals.user = decoded?.data;
         return next();

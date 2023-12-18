@@ -15,7 +15,7 @@ const addressSchema = object(
             sublocation: string({
                 required_error: "Sublocation is required"
             }),
-            phone: string({
+            phone: number({
                 required_error: "Phone number is required"
             })
         })

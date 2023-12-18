@@ -6,7 +6,7 @@ import { comparePassword } from "../../funct/password";
 import log from "../../funct/logger";
 import  {generateUUID} from "../../funct/generateId"
 import {hashPassword} from "../../funct/password";
-const User = sequelize_instance.models.user;
+const User = sequelize_instance.models.User;
 interface UserInterface extends User_type { }
 class UserService {
     static async create({ ...user }: UserInterface) {

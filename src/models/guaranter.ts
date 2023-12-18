@@ -43,7 +43,7 @@ const guaranter=(sequelize: Sequelize) => {
             type: DataTypes.UUID,
             allowNull: false,
             references: {
-                model: "address",
+                model: "Address",
                 key: "id",
             },
         },
@@ -51,7 +51,7 @@ const guaranter=(sequelize: Sequelize) => {
             type: DataTypes.UUID,
             allowNull: false,
             references: {
-                model: "user",
+                model: "User",
                 key: "id",
             },
         },
@@ -66,7 +66,7 @@ const guaranter=(sequelize: Sequelize) => {
 
     },{
         sequelize,
-        modelName: "guaranter",
+        modelName: "Guaranter",
         tableName: "Guaranter"
     })
 return Guaranter
