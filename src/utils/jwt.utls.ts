@@ -1,8 +1,11 @@
 import jwt from 'jsonwebtoken';
+import config from '../config/default'
+import TokenService from '../services/token';
 
 
-const privateKey = process.env.PRIVATE_KEY
-const publicKey = process.env.PUBLIC_KEY
+const privateKey = config.privateKey
+const publicKey = config.publicKey
+
 
 export const singToken = async (payload: Object, options?: jwt.SignOptions | undefined) => {
     return jwt.sign(
@@ -17,7 +20,7 @@ export const singToken = async (payload: Object, options?: jwt.SignOptions | und
 
 export const verifyToken = async (token: string) => {
     try {
-        const decoded: any = await jwt.verify(token, publicKey);
+        const decoded: any = await TokenService.decode(token)
 
         return (
             {

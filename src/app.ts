@@ -16,6 +16,7 @@ const app = express()
 const port = process.env.PORT
 app.use(express.json())
 app.use(deserializeUser)
+
 const sequelize_auth = async (req: Request, res:Response, next: NextFunction) => {
   try {
     await sequelize_instance.authenticate().then(() => {

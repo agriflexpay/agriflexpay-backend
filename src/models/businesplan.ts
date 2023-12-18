@@ -42,7 +42,7 @@ const plan  = (sequelize: Sequelize) => {
             type: DataTypes.UUID,
             allowNull: false,
             references: {
-                model: "agency",
+                model: "Agency",
                 key: "id",
             },
         },
@@ -57,7 +57,7 @@ const plan  = (sequelize: Sequelize) => {
 
 }, {
     sequelize: sequelize,
-    modelName: "plan",
+    modelName: "Plan",
     tableName: "Plan",
 })
 return Plan

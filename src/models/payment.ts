@@ -31,7 +31,7 @@ const payment=(sequelize: Sequelize) => {
             type: DataTypes.UUID,
             allowNull: false,
             references: {
-                model: "user",
+                model: "User",
                 key: "id",
             },
         },
@@ -39,7 +39,7 @@ const payment=(sequelize: Sequelize) => {
             type: DataTypes.UUID,
             allowNull: false,
             references: {
-                model: "plan",
+                model: "Plan",
                 key: "id",
             },
         },
@@ -47,7 +47,7 @@ const payment=(sequelize: Sequelize) => {
             type: DataTypes.UUID,
             allowNull: false,
             references: {
-                model: "agency",
+                model: "Agency",
                 key: "id",
             },
         },
@@ -56,12 +56,8 @@ const payment=(sequelize: Sequelize) => {
             allowNull: false,
         },
         phone:{
-            type: DataTypes.INTEGER,
+            type: DataTypes.STRING,
             allowNull: false,
-            references: {
-                model: "user",
-                key: "phone",
-            },
         },
         updated_at:{
             type: DataTypes.DATE,
@@ -70,7 +66,7 @@ const payment=(sequelize: Sequelize) => {
         
     },{
         sequelize,
-        modelName:"payment",
+        modelName:"Payment",
         tableName:"Payment"
     })
 

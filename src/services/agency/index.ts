@@ -1,20 +1,20 @@
 import sequelize_instance from "../../models/index"
 import { Agency_type } from "@/types/type"
-
-const Agency = sequelize_instance.models.agency
+import  {generateUUID} from "../../funct/generateId"
+const Agency = sequelize_instance.models.Agency
 
 interface AgencyInterface extends Agency_type { }
 
 export default class AgencyService {
 
-    static async create({ ...agency }: { agency: AgencyInterface }) {
+    static async create({agency }: { agency: AgencyInterface }) {
         try {
-            const created_At = new Date()
-            const updated_At = new Date()
-            const data = { ...agency, created_At, updated_At }
+
+            const data = { ...agency,id:generateUUID() }
+            console.log(data)
             return await Agency.create(data)
         } catch (error) {
-            return false
+            return error
         }
     }
 
