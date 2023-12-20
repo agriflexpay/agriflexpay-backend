@@ -45,16 +45,7 @@ const plan  = (sequelize: Sequelize) => {
                 model: "Agency",
                 key: "id",
             },
-        },
-        created_at:{
-            type: DataTypes.DATE,
-            allowNull: false,
-        },
-        updated_at:{
-            type: DataTypes.DATE,
-            allowNull: false,
         }
-
 }, {
     sequelize: sequelize,
     modelName: "Plan",

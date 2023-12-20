@@ -54,16 +54,7 @@ const guaranter=(sequelize: Sequelize) => {
                 model: "User",
                 key: "id",
             },
-        },
-        created_at:{
-            type: DataTypes.DATE,
-            allowNull: false,
-        },
-        updated_at:{
-            type: DataTypes.DATE,
-            allowNull: false,
         }
-
     },{
         sequelize,
         modelName: "Guaranter",

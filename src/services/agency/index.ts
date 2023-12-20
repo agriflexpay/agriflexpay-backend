@@ -25,7 +25,7 @@ export default class AgencyService {
             const _agency = await Agency.update(data, { where: { id: id } })
             return _agency
         } catch (error) {
-            return false
+            return error
         }
     }
 

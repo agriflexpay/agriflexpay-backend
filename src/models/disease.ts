@@ -51,24 +51,20 @@ const disease = (sequelize: Sequelize) => {
             allowNull: false,
         },
         victim:{
-            type: DataTypes.JSONB,
+            type: DataTypes.JSONB,//affected animals or plants 
             allowNull: false,
         },
         location_id:{
             type: DataTypes.UUID,
             allowNull: false,
+            references: {
+                model: 'Address',
+                key: 'id'
+            }
         },
         farmer_id:{
             type: DataTypes.UUID,
             allowNull: true,
-        },
-        createdAt:{
-            type: DataTypes.DATE,
-            allowNull: false,
-        },
-        updatedAt:{
-            type: DataTypes.DATE,
-            allowNull: false,
         }
     },
         {
