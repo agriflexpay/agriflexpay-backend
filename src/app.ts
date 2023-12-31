@@ -1,6 +1,7 @@
 import express, { NextFunction } from 'express'
 import dotenv from 'dotenv'
 import { Request,Response } from 'express'
+import cors from 'cors'
 import  sequelize_instance from './models/index'
 import  logger  from './funct/logger'
 import {deserializeUser} from './middleware/deserializeUser'
@@ -13,10 +14,17 @@ import agencyRoutes from './routes/agency'
 
 dotenv.config()
 const app = express()
+
 const port = process.env.PORT
 app.use(express.json())
 app.use(deserializeUser)
-
+app.use(express.json());
+app.use(cors(
+  {
+    origin:[ 'http://localhost:5174','http://localhost:5173'],
+    credentials: true
+  }
+));
 const sequelize_auth = async (req: Request, res:Response, next: NextFunction) => {
   try {
     await sequelize_instance.authenticate().then(() => {

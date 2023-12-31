@@ -22,7 +22,8 @@ class UserController {
             const user: any = await UserService.validate_password({ email, password });
 
             if (!user) {
-                return ResponseService.error({ res, error: "Invalid email or password" });
+              let error = "Invalid email or password";
+                return ResponseService.error({ res, error});
             }
 
             return TokenService.generateToken({
@@ -47,12 +48,13 @@ class UserController {
         }
     }
 
-    static async fetchAll(req:Request,res:Response){
+    static async fetchAllUsers(req:Request,res:Response){
         try{
             const users = await UserService.users();
             if(!users){
                 return ResponseService.error({res,error:"Users not found"})
             }
+            return ResponseService.success({res,data:users})
         }
         catch(error){
             ResponseService.error({res,error})
