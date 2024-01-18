@@ -1,5 +1,4 @@
 import { Sequelize , Model, DataTypes} from "sequelize"
-
 const user=(sequelize: Sequelize) => {
     class User extends Model {
        public id?: string
@@ -21,13 +20,6 @@ const user=(sequelize: Sequelize) => {
        public longitude?: string
        public createdAt?: Date
        public updatedAt?: Date
-
-    // @BeforeCreate
-    // static async hashedPassword(instance: User) {
-    //     const password = instance.dataValues.password
-    //     instance.password = await hashPassword({password})
-       
-    // }
     }
     User.init({
         id: {

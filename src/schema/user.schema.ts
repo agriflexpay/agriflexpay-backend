@@ -40,10 +40,16 @@ export const userSchema = object(
     }
 )
 
-export const params = object({
-    id: string({
-        required_error: "User ID required"
-    })
-})
+export const params = object(
+    {
+        params: object(
+            {
+                id: string({
+                    required_error: "ID is required"
+                })
+            }
+        )
+    }
+)
 
 export type CreateUserInput = Omit<TypeOf<typeof userSchema>, "passwordConfirmation">;

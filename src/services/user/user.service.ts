@@ -54,7 +54,11 @@ class UserService {
 
     static async users() {
        try{
-        const _users = await User.findAll();
+        const _users = await User.findAll(
+            {
+                attributes: { exclude: ["password","reset_token","createdAt","updatedAt","address_id", "reset_token_expires","verification_token","verification_token_expires"] }
+            }
+        );
         return _users?.map((user) =>user.dataValues )
        }catch(error){
            return error;

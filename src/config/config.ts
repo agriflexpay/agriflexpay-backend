@@ -1,5 +1,5 @@
 import dotenv from 'dotenv';
-import { Dialect } from 'sequelize';
+import { Dialect,Sequelize } from 'sequelize';
 dotenv.config();
  export const config= {
 "development": 
@@ -29,4 +29,15 @@ dotenv.config();
   "socketPath":`${process.env.SOCKETPATH}`
 }
 }
-
+export const connection = new Sequelize(
+  config.development.database,
+  config.development.username,
+  config.development.password,
+  {
+    dialect: 'postgres',
+    host:config.development.host,
+    dialectOptions:{
+      socketPath:config.development.socketPath
+      }
+  }
+  );

@@ -11,7 +11,7 @@ import guarantorRoutes from './routes/guarantor'
 import businessplanroutes from './routes/businessplan'
 import diseaseRoutes from './routes/diseases'
 import agencyRoutes from './routes/agency'
-
+import kukuRoutes from './routes/kukuPlan'
 dotenv.config()
 const app = express()
 
@@ -21,7 +21,7 @@ app.use(deserializeUser)
 app.use(express.json());
 app.use(cors(
   {
-    origin:[ 'http://localhost:5174','http://localhost:5173'],
+    origin:[ 'http://localhost:5174','http://localhost:5173','http://localhost:8080','http://192.168.210.68:8080'],
     credentials: true
   }
 ));
@@ -52,5 +52,6 @@ app.listen(port, () => {
   businessplanroutes(app)
   diseaseRoutes(app)
   agencyRoutes(app)
+  kukuRoutes(app)
 
 })

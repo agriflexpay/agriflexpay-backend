@@ -106,3 +106,25 @@ export interface Disease_type{
     createdAt?: Date
     updatedAt?: Date
 }
+
+export interface KukuPlan_type{
+    id?: string
+    name?: string
+    description?: string
+    amount?: number
+    duration?: number
+    interest_rate?: number
+    vendor_id?: string
+    type?: []
+    puporse?: string
+    maturity?: number
+    averageEggProduction?: number
+    meatProduction?: number
+    averageWeight?: number
+    feeding?: string
+    setting?: string
+    declineinProduction?: number
+    diseaseResistance?: string
+    createdAt?: Date
+    updatedAt?: Date
+}

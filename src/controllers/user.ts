@@ -23,7 +23,12 @@ class UserController {
 
             if (!user) {
               let error = "Invalid email or password";
-                return ResponseService.error({ res, error});
+              return  ResponseService.success({ res,data: error });
+              
+            }
+            if(user===false){
+                let error = "Invalid email or password";
+                return  ResponseService.success({ res,data: error });
             }
 
             return TokenService.generateToken({

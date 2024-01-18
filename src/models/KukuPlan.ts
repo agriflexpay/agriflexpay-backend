@@ -11,7 +11,7 @@ const kukuplan  = (sequelize: Sequelize) => {
         public vendor_id?: string
         public createdAt?: Date
         public updatedAt?: Date
-        public type?: object
+        public type?:[]
         public puporse?: string
         public maturity?: number
         public averageEggProduction?: number
