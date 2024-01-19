@@ -1,8 +1,8 @@
 
 import { omit } from "lodash";
-import {Agent_type} from "../../types/type"
+import { Agent_type } from "../../types/type"
 import sequelize_instance from "../../models/index";
-import  {generateUUID} from "../../funct/generateId"
+import { generateUUID } from "../../funct/generateId"
 const Agent = sequelize_instance.models.Agent
 const user = sequelize_instance.models.User
 interface Agent_types extends Agent_type { }
@@ -15,7 +15,7 @@ class AgentServices {
             })
             return agent
         } catch (error) {
-        return error
+            return error
         }
     }
 
@@ -29,21 +29,37 @@ class AgentServices {
                     }]
                 }
             )
-            return Agents
+            const reslt = Agents.map((agent: any) => {
+                const user = agent.dataValues.User.dataValues
+                const _user = omit(user, filter)
+                agent.dataValues.User.dataValues = _user
+                return agent;
+            })
+            return reslt
+
         } catch (error) {
             return error
         }
     }
 
-    static async getOneAgent({user_uuid}:{user_uuid:string}) {
+    static async getOneAgent({ user_uuid }: { user_uuid: string }) {
         try {
-            const agent = await Agent.findOne({
+            const agent = await Agent.findAll({
                 where: {
-                    user_uuid:user_uuid
+                    user_uuid: user_uuid
                 },
                 include: [user]
             })
-            return agent
+            if (agent) {
+                const reslt = agent.map((agent: any) => {
+                    const user = agent.dataValues.User.dataValues
+                    const _user = omit(user, filter)
+                    agent.dataValues.User.dataValues = _user
+                    return agent;
+                })
+                return reslt
+            }
+
         } catch (error) {
             return error
         }
@@ -62,5 +78,17 @@ class AgentServices {
         }
     }
 }
+const filter = ["password",
+    "created_at",
+    "updated_at",
+    "reset_password_token",
+    "reset_password_expires",
+    "reset_token",
+    "reset_token_expires",
+    "is_account_verified",
+    "verification_token",
+    "verification_token_expires"
+]
+
 
 export default AgentServices;
