@@ -20,7 +20,7 @@ const vet_doctor=(sequelize: Sequelize) => {
         public createdAt?: Date
         public updatedAt?: Date
     }
-
+ 
     Vet_doctor.init({
         id: {
             primaryKey: true,
@@ -29,6 +29,11 @@ const vet_doctor=(sequelize: Sequelize) => {
         user_uuid: {
             type: DataTypes.UUID,
             allowNull: false,
+            unique:true,
+            references:{
+                model:"User",
+                key:"id"
+            }
         },
         agent_uuid: {
             type: DataTypes.UUID,
@@ -46,7 +51,8 @@ const vet_doctor=(sequelize: Sequelize) => {
     },
      {
         sequelize,
-        tableName: 'vet_doctors',
+        modelName: 'Vet_doctor',
+        tableName: 'Vet_doctor',
         timestamps: true
     })
     Vet_doctor.belongsTo(userModel,{foreignKey:"user_uuid"})

@@ -7,8 +7,8 @@ const payment=(sequelize: Sequelize) => {
         public amount?: number
         public paymentMode?: string
         public user_id?: string
-        public plan_id?: string
-        public vendor_id?: string
+        public plan_uuid?: string
+        public vendor_uuid?: string
         public phone?: number
         public createdAt?: Date
         public updatedAt?: Date
@@ -27,7 +27,7 @@ const payment=(sequelize: Sequelize) => {
             type: DataTypes.STRING,
             allowNull: false,
         },
-        user_id: {
+        user_uuid: {
             type: DataTypes.UUID,
             allowNull: false,
             references: {
@@ -35,7 +35,7 @@ const payment=(sequelize: Sequelize) => {
                 key: "id",
             },
         },
-        plan_id: {
+        plan_uuid: {
             type: DataTypes.UUID,
             allowNull: false,
             references: {
@@ -43,17 +43,13 @@ const payment=(sequelize: Sequelize) => {
                 key: "id",
             },
         },
-        vendor_id: {
+        vendor_uuid: {
             type: DataTypes.UUID,
             allowNull: false,
             references: {
                 model: "Agency",
                 key: "id",
             },
-        },
-        created_at:{
-            type: DataTypes.DATE,
-            allowNull: false,
         },
         phone:{
             type: DataTypes.STRING,
@@ -63,7 +59,8 @@ const payment=(sequelize: Sequelize) => {
     },{
         sequelize,
         modelName:"Payment",
-        tableName:"Payment"
+        tableName:"Payment",
+        timestamps: true
     })
 
     return Payment

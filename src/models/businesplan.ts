@@ -1,4 +1,8 @@
 import { Sequelize,DataTypes, Model  } from "sequelize";
+import {connection} from "../config/config"
+import agency from "./angency";
+
+const agencyModel = agency(connection)
 
 const plan  = (sequelize: Sequelize) => {
      class Plan extends Model {
@@ -8,7 +12,7 @@ const plan  = (sequelize: Sequelize) => {
         public amount?: number
         public duration?: number
         public interest_rate?: number
-        public vendor_id?: string
+        public vendor_uuid?: string
         public createdAt?: Date
         public updatedAt?: Date
     }
@@ -18,39 +22,26 @@ const plan  = (sequelize: Sequelize) => {
             primaryKey: true,
             type: DataTypes.UUID,
         },
-        name: {
-            type: DataTypes.STRING,
-            allowNull: false,
-        },
-        description: {
-            type: DataTypes.STRING,
-            allowNull: false,
-        },
-        amount: {
-            type: DataTypes.DOUBLE,
-            allowNull: false,
-        },
-        duration: {
-            type: DataTypes.DOUBLE,
-            allowNull: false,
-        },
-        interest_rate: {
-            type: DataTypes.DOUBLE,
-            allowNull: false,
-        },
-        vendor_id: {
+        
+        vendor_uuid: {
             type: DataTypes.UUID,
             allowNull: false,
             references: {
                 model: "Agency",
                 key: "id",
             },
-        }
+        },
+        plan_uuid: {
+            type: DataTypes.UUID,
+            allowNull: false,
+        },
 }, {
     sequelize: sequelize,
     modelName: "Plan",
     tableName: "Plan",
+    timestamps: true,
 })
+Plan.belongsTo(agencyModel,{foreignKey:"vendor_uuid"})
 return Plan
 }
 

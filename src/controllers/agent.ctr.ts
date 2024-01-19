@@ -1,0 +1,59 @@
+import { Request, Response, response } from "express";
+import AgentServices  from "../services/agent/index";
+import ResponseService from "../funct/responce"
+
+class AgentController {
+   static async createAgent(req: Request, res: Response) {
+        try {
+            const { user_uuid, agency_uuid} = req.body
+            const input = {
+                user_uuid,
+                agency_uuid,
+            }
+            const Agent = await AgentServices.createAgent(input)
+            if (Agent) {
+                return ResponseService.success({res,data:Agent})
+            }
+        } catch (error) {
+            return ResponseService.error({res,error})
+        }
+    }
+    static async getAllAgents(req: Request, res: Response) {
+        try {
+            const Agents = await AgentServices.getAllAgents()
+            if (Agents) {
+                return ResponseService.success({res,data:Agents})
+            }
+        } catch (error) {
+            return ResponseService.error({res,error})
+        }
+    }
+    static async getOneAgent(req: Request, res: Response) {
+        try {
+            const  user_uuid  = req.params?.user_uuid
+            const Agent = await AgentServices.getOneAgent({user_uuid:user_uuid})
+            if (Agent) {
+                return ResponseService.success({res,data:Agent})
+            }
+        } catch (error) {
+            return ResponseService.error({res,error})
+        }
+    }
+    static async deleteAgent(req: Request, res: Response) {
+        try {
+            const { user_uuid, agent_uuid } = req.body
+            const input = {
+                user_uuid,
+                agent_uuid
+            }
+            const Agent = await AgentServices.deleteAgent(input)
+            if (Agent) {
+                return ResponseService.success({res,data:Agent})
+            }
+        } catch (error) {
+            return ResponseService.error({res,error})
+        }
+    }
+}
+
+export default AgentController;

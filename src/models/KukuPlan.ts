@@ -102,7 +102,7 @@ const kukuplan  = (sequelize: Sequelize) => {
 }, {
     sequelize: sequelize,
     modelName: "KukuPlan",
-    tableName: "KukuPlan",
+    tableName: "kukuPlan",
 })
 return KukuPlan
 }

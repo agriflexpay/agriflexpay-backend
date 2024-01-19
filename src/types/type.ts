@@ -128,3 +128,38 @@ export interface KukuPlan_type{
     createdAt?: Date
     updatedAt?: Date
 }
+
+export interface Famer_type{
+    id?: string
+    user_uuid?: string
+    agent_uuid?: string
+    agency_uuid?: string
+    plan_uuid?: string
+    createdAt?: Date
+    updatedAt?: Date
+}
+export interface Agent_type{
+    id?: string
+    user_uuid?: string
+    agency_uuid?: string
+    createdAt?: Date
+    updatedAt?: Date
+}
+export interface Vendor_type{
+    id?: string
+    user_uuid?: string
+    agency_uuid?: string
+    createdAt?: Date
+    updatedAt?: Date
+}
+export interface Plan_type{
+    id?: string
+    vendor_uuid?: string
+    name?: string
+    description?: string
+    amount?: number
+    duration?: number
+    interest_rate?: number
+    createdAt?: Date
+    updatedAt?: Date
+}

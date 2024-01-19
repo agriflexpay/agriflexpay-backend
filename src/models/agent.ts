@@ -24,20 +24,31 @@ const agent=(sequelize: Sequelize) => {
         user_uuid: {
             type: DataTypes.UUID,
             allowNull: false,
+            unique:true,
+            references:{
+                model:"User",
+                key:"id"
+            }
         },
         agency_uuid: {
             type: DataTypes.UUID,
             allowNull: false,
-        },
+            references:{
+                model:"Agency",
+                key:"id"
+            }
+        }
         
     },
      {
         sequelize,
-        tableName: 'agents',
+        tableName: 'Agent',
+        modelName: 'Agent',
         timestamps: true
     })
     Agent.belongsTo(userModel,{foreignKey:"user_uuid"})
     Agent.belongsTo(agencyModel,{foreignKey:"agency_uuid"})
+    
     return Agent
 }
 export default agent

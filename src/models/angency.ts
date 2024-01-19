@@ -46,6 +46,7 @@ const agency = (sequelize: Sequelize) => {
         sequelize:sequelize,
         modelName: "Agency",
         tableName: "Agency",
+        timestamps: true,
     })
     return Agency
 }

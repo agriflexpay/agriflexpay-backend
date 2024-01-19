@@ -12,6 +12,8 @@ import businessplanroutes from './routes/businessplan'
 import diseaseRoutes from './routes/diseases'
 import agencyRoutes from './routes/agency'
 import kukuRoutes from './routes/kukuPlan'
+import famerRoutes from './routes/famer'
+import agentRoutes from './routes/agent.routes'
 dotenv.config()
 const app = express()
 
@@ -28,6 +30,7 @@ app.use(cors(
 const sequelize_auth = async (req: Request, res:Response, next: NextFunction) => {
   try {
     await sequelize_instance.authenticate().then(() => {
+      //{ force: true }
       sequelize_instance.sync().then(() => {
         logger.info('Database Connection has been established successfully.')
         next()
@@ -53,5 +56,7 @@ app.listen(port, () => {
   diseaseRoutes(app)
   agencyRoutes(app)
   kukuRoutes(app)
+  famerRoutes(app)
+  agentRoutes(app)
 
 })

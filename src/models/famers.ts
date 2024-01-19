@@ -28,24 +28,42 @@ const famer=(sequelize: Sequelize) => {
         user_uuid: {
             type: DataTypes.UUID,
             allowNull: false,
+            unique:true,
+            references:{
+                model:"User",
+                key:"id"
+            }
         },
         agent_uuid: {
             type: DataTypes.UUID,
             allowNull: false,
+            references:{
+                model:"Agent",
+                key:"id"
+            }
         },
         agency_uuid: {
             type: DataTypes.UUID,
             allowNull: false,
+            references:{
+                model:"Agency",
+                key:"id"
+            }
         },
         plan_uuid: {
             type: DataTypes.UUID,
-            allowNull: false,
+            allowNull: true,
+            references:{
+                model:"Plan",
+                key:"id"
+            }
         },
         
     },
      {
         sequelize,
-        tableName: 'farmers',
+        modelName: 'Famer',
+        tableName: 'Farmer',
         timestamps: true
     })
     Famer.belongsTo(userModel,{foreignKey:"user_uuid"})
