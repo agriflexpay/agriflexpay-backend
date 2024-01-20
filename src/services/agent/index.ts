@@ -41,7 +41,31 @@ class AgentServices {
             return error
         }
     }
+    static async getAllAgentsByAgency({ agency_uuid }: { agency_uuid: string }) {
+        try {
+            const Agents = await Agent.findAll(
+                {
+                    where: {
+                        agency_uuid: agency_uuid
+                    },
+                    include: [{
+                        all: true,
+                        nested: true
+                    }]
+                }
+            )
+            const reslt = Agents.map((agent: any) => {
+                const user = agent.dataValues.User.dataValues
+                const _user = omit(user, filter)
+                agent.dataValues.User.dataValues = _user
+                return agent;
+            })
+            return reslt
 
+        } catch (error) {
+            return error
+        }
+    }
     static async getOneAgent({ user_uuid }: { user_uuid: string }) {
         try {
             const agent = await Agent.findAll({
@@ -65,11 +89,12 @@ class AgentServices {
         }
     }
 
-    static async deleteAgent(input: Agent_types) {
+    static async deleteAgent({ user_uuid, agency_uuid }: { user_uuid: string, agency_uuid: string }) {
         try {
             const agent = await Agent.destroy({
                 where: {
-                    ...input
+                    user_uuid: user_uuid,
+                    agency_uuid: agency_uuid
                 }
             })
             return agent

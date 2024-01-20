@@ -31,13 +31,10 @@ export interface  Address_type {
      updatedAt?: Date
 }
 
-export interface Business_plan {
+export interface Plan_type {
     id?: string
     name?: string
-    description?: string
-    amount?: number
-    duration?: number
-    interest_rate?: number
+    plan_uuid?: string
     vendor_id?: string
     createdAt?: Date
     updatedAt?: Date

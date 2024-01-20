@@ -19,9 +19,11 @@ import {number, object, string, TypeOf } from "zod";
     })
 
     const params = object({
-        user_uuid: string({
-            required_error: "Farmer ID required"
-        })
+       params: object({
+              user_uuid: string({
+                required_error: "User ID is required"
+              })
+         })
     })
 
  const deleteFarmerSchema = object(

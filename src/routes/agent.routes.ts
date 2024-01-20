@@ -8,6 +8,7 @@ const routes = (app: Express) => {
     app.delete("/api/agent/delete",requireUser,validate(AgentSchema.deleteAgentSchema),AgentController.deleteAgent)
     app.get("/api/agent/get-all",requireUser,AgentController.getAllAgents)
     app.get("/api/agent/get-one/:user_uuid",requireUser,validate(AgentSchema.params),AgentController.getOneAgent)
+    app.get("/api/agent/get-all-by-agency/:agency_uuid",requireUser,validate(AgentSchema.agencyParams),AgentController.getAllAgentsByAgency)
 
 }
 

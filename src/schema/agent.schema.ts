@@ -23,15 +23,24 @@ import {number, object, string, TypeOf } from "zod";
             )
         
     });
-
+    const agencyParams = object({
+            
+            params: object(
+                {
+                    agency_uuid: string({
+                        required_error: "Agency ID required"
+                    })
+                }
+            )
+    })
  const deleteAgentSchema = object(
     {
         body: object({
             user_uuid: string({
                 required_error: "Agent ID is required"
             }),
-            agent_uuid: string({
-                required_error: "Agent ID is required"
+            agency_uuid: string({
+                required_error: "Agency ID is required"
             }),
         })
     })
@@ -39,5 +48,6 @@ import {number, object, string, TypeOf } from "zod";
 export const AgentSchema={
     createAgentSchema,
     deleteAgentSchema,
-    params
+    params,
+    agencyParams
 }

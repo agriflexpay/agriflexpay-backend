@@ -32,7 +32,29 @@ class FamerServices {
             const farmer = await Famer.findOne({
                 where: {
                     ...input
+                },
+                include: [
+                 {
+                    association: "User",
+                    attributes: {
+                        exclude: ["password",
+                        "created_at",
+                        "updated_at",
+                        "reset_password_token",
+                        "reset_password_expires",
+                        "reset_token",
+                        "reset_token_expires",
+                        "is_account_verified",
+                        "verification_token",
+                        "verification_token_expires"
+                    ]
+                    },
+                 },
+                 {
+                    association: "Agency"
                 }
+
+                ]
             })
             return farmer
         } catch (error) {

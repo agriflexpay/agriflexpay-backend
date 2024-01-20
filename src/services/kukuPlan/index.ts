@@ -19,7 +19,7 @@ export default class KukuPlanService {
     }
 
 
-    static async update({ id, ...data }:{id:string,data: KukuPlanInterface}) {
+    static async update({ id, data }:{id:string,data: KukuPlanInterface}) {
         const kukuPlan = await KukuPlan.update({...data}, {
             where: {
                 id: id

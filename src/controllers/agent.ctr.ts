@@ -28,6 +28,17 @@ class AgentController {
             return ResponseService.error({res,error})
         }
     }
+    static async getAllAgentsByAgency(req: Request, res: Response) {
+        try {
+            const { agency_uuid } = req.params
+            const Agents = await AgentServices.getAllAgentsByAgency({agency_uuid:agency_uuid})
+            if (Agents) {
+                return ResponseService.success({res,data:Agents})
+            }
+        } catch (error) {
+            return ResponseService.error({res,error})
+        }
+    }
     static async getOneAgent(req: Request, res: Response) {
         try {
             const  user_uuid  = req.params?.user_uuid
@@ -41,12 +52,8 @@ class AgentController {
     }
     static async deleteAgent(req: Request, res: Response) {
         try {
-            const { user_uuid, agent_uuid } = req.body
-            const input = {
-                user_uuid,
-                agent_uuid
-            }
-            const Agent = await AgentServices.deleteAgent(input)
+            const { user_uuid, agency_uuid } = req.body
+            const Agent = await AgentServices.deleteAgent({user_uuid:user_uuid,agency_uuid:agency_uuid})
             if (Agent) {
                 return ResponseService.success({res,data:Agent})
             }

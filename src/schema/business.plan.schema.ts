@@ -1,35 +1,51 @@
-import {number, object, string, TypeOf } from "zod";
+import { number, object, string, TypeOf } from "zod";
 
-export const businessPlanSchema = object(
+const businessPlanSchema = object(
     {
         body: object({
-            name: string({
-                required_error: "Name is required"
+            vendor_uuid: string({
+                required_error: "vendor_uuid is required"
             }),
-            description: string({
-                required_error: "Description is required"
+            plan_uuid: string({
+                required_error: "plan_uuid is required"
             }),
-            amount: number({
-                required_error: "Amount is required"
-            }),
-            duration: number({
-                required_error: "Duration is required"
-            }),
-            interest_rate: number({
-                required_error: "Interest rate is required"
-            }),
-            vendor_id: string({
-                required_error: "Vendor ID is required"
-            })
 
         })
     })
 
- export   const params = object({
+const params = object({
+    params: object({
         id: string({
-            required_error: "Business Plan ID required"
+            required_error: "id is required"
         })
     })
+})
+
+const deleteBusinessPlanSchema = object({
+    body: object({
+        vendor_uuid: string({
+            required_error: "vendor_uuid is required"
+        }),
+        plan_uuid: string({
+            required_error: "plan_uuid is required"
+        }),
+
+    })
+})
+
+const fetchByAgencySchema = object({
+    params: object({
+        agency_uuid: string({
+            required_error: "agency_uuid is required"
+        })
+    })
+})
+export const businessPlanSchemas = {
+    businessPlanSchema,
+    params,
+    fetchByAgencySchema,
+    deleteBusinessPlanSchema
+}
 
 
 

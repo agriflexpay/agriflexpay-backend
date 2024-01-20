@@ -1,4 +1,7 @@
 import { Sequelize , Model, DataTypes} from "sequelize"
+import {connection} from "../config/config"
+import address from "./address"
+const Address = address(connection)
 const user=(sequelize: Sequelize) => {
     class User extends Model {
        public id?: string
@@ -111,6 +114,12 @@ const user=(sequelize: Sequelize) => {
         timestamps: true,
      }
       )
+
+    User.hasOne(Address, {
+        foreignKey: "id",
+        sourceKey: "address_id",
+        as: "Address",
+      });
      return User
 }    
 

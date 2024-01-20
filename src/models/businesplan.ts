@@ -1,9 +1,9 @@
 import { Sequelize,DataTypes, Model  } from "sequelize";
 import {connection} from "../config/config"
 import agency from "./angency";
-
+import kukuplan from "./KukuPlan";
 const agencyModel = agency(connection)
-
+const kukuplanModel = kukuplan(connection)
 const plan  = (sequelize: Sequelize) => {
      class Plan extends Model {
         public id?: string
@@ -42,6 +42,7 @@ const plan  = (sequelize: Sequelize) => {
     timestamps: true,
 })
 Plan.belongsTo(agencyModel,{foreignKey:"vendor_uuid"})
+Plan.belongsTo(kukuplanModel,{foreignKey:"plan_uuid"})
 return Plan
 }
 

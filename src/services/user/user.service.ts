@@ -47,7 +47,19 @@ class UserService {
     }
 
     static async fetch({ id }: UserInterface) {
-        const _user = await User.findByPk(id)
+        const _user = await User.findByPk(
+            id,
+            {
+                attributes: {
+                    exclude:  filter
+                },
+                include: [
+                    {
+                        association: "Address"
+                    }
+                ]
+            }
+        )
         const _data = {..._user?.dataValues}
         return omit(_data,"password","reset_token", "reset_token_expires","verification_token","verification_token_expires")
     }
@@ -55,9 +67,17 @@ class UserService {
     static async users() {
        try{
         const _users = await User.findAll(
-            {
-                attributes: { exclude: ["password","reset_token","createdAt","updatedAt","address_id", "reset_token_expires","verification_token","verification_token_expires"] }
-            }
+               {
+                    attributes: {
+                        exclude:  filter
+                    },
+                    include: [
+                        {
+                            association: "Address"
+                        }
+                    ]  
+                },
+                     
         );
         return _users?.map((user) =>user.dataValues )
        }catch(error){
@@ -125,5 +145,16 @@ class UserService {
         return user_image;
     }
 }
+const filter = ["password",
+    "created_at",
+    "updated_at",
+    "reset_password_token",
+    "reset_password_expires",
+    "reset_token",
+    "reset_token_expires",
+    "is_account_verified",
+    "verification_token",
+    "verification_token_expires"
+]
 
 export default UserService;
