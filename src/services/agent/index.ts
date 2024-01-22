@@ -105,6 +105,7 @@ class AgentServices {
 }
 const filter = ["password",
     "created_at",
+    "address_id",
     "updated_at",
     "reset_password_token",
     "reset_password_expires",

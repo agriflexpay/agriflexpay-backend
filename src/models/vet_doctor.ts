@@ -37,15 +37,15 @@ const vet_doctor=(sequelize: Sequelize) => {
         },
         agent_uuid: {
             type: DataTypes.UUID,
-            allowNull: false,
+            allowNull: true,
         },
         agency_uuid: {
             type: DataTypes.UUID,
             allowNull: false,
         },
         famer_uuid: {
-            type: DataTypes.UUID,
-            allowNull: false,
+            type: DataTypes.JSONB,
+            allowNull: true,
         },
         
     },
@@ -58,7 +58,7 @@ const vet_doctor=(sequelize: Sequelize) => {
     Vet_doctor.belongsTo(userModel,{foreignKey:"user_uuid"})
     Vet_doctor.belongsTo(agencyModel,{foreignKey:"agency_uuid"})
     Vet_doctor.belongsTo(agentModel,{foreignKey:"agent_uuid"})
-    Vet_doctor.belongsTo(famerModel,{foreignKey:"famer_uuid"})
+    Vet_doctor.hasMany(famerModel,{foreignKey:"famer_uuid"})
 
     return Vet_doctor
 }

@@ -1,47 +1,47 @@
 
 import { omit } from "lodash";
-import {User_type} from "../../types/type"
+import { User_type } from "../../types/type"
 import sequelize_instance from "../../models/index";
 import { comparePassword } from "../../funct/password";
 import log from "../../funct/logger";
-import  {generateUUID} from "../../funct/generateId"
-import {hashPassword} from "../../funct/password";
+import { generateUUID } from "../../funct/generateId"
+import { hashPassword } from "../../funct/password";
 const User = sequelize_instance.models.User;
 interface UserInterface extends User_type { }
 class UserService {
     static async create({ ...user }: UserInterface) {
-      try{
-        const tohashpassword = user?.password||''
-        const data =
-        {
-            ...user,
-            id:generateUUID(),
-            password:await hashPassword({password:tohashpassword})
-        }
-        log.info(sequelize_instance.models);
-        const _user = await User.create(data);
+        try {
+            const tohashpassword = user?.password || ''
+            const data =
+            {
+                ...user,
+                id: generateUUID(),
+                password: await hashPassword({ password: tohashpassword })
+            }
+            log.info(sequelize_instance.models);
+            const _user = await User.create(data);
 
-        const _data = {..._user.dataValues}
-        return omit(_data,"password","reset_token", "reset_token_expires","verification_token","verification_token_expires");
-      }
-        catch(error){
+            const _data = { ..._user.dataValues }
+            return omit(_data, "password", "reset_token", "reset_token_expires", "verification_token", "verification_token_expires");
+        }
+        catch (error) {
             return error;
         }
     }
 
     static async update({ id, ...user }: UserInterface) {
-        try{
+        try {
             const _user = await User.update(
-               user,
+                user,
                 {
                     where: {
                         id: id
                     }
                 }
             );
-    
+
             return _user;
-        }catch(error){
+        } catch (error) {
             return error;
         }
     }
@@ -51,7 +51,7 @@ class UserService {
             id,
             {
                 attributes: {
-                    exclude:  filter
+                    exclude: filter
                 },
                 include: [
                     {
@@ -60,29 +60,29 @@ class UserService {
                 ]
             }
         )
-        const _data = {..._user?.dataValues}
-        return omit(_data,"password","reset_token", "reset_token_expires","verification_token","verification_token_expires")
+        const _data = { ..._user?.dataValues }
+        return _user
     }
 
     static async users() {
-       try{
-        const _users = await User.findAll(
-               {
+        try {
+            const _users = await User.findAll(
+                {
                     attributes: {
-                        exclude:  filter
+                        exclude: filter
                     },
                     include: [
                         {
                             association: "Address"
                         }
-                    ]  
+                    ]
                 },
-                     
-        );
-        return _users?.map((user) =>user.dataValues )
-       }catch(error){
-           return error;
-       }
+
+            );
+            return _users?.map((user) => user.dataValues)
+        } catch (error) {
+            return error;
+        }
     }
 
     static async filter({ ...query }: UserInterface) {
@@ -90,13 +90,21 @@ class UserService {
 
         const _users = await User.findAll({
             where: condition,
+            attributes: {
+                exclude: filter
+            },
+            include: [
+                {
+                    association: "Address"
+                }
+            ]
         })
-        const users = _users.map((user) => {
-            const _users = { ...user.dataValues }
-            return omit(_users,"password","reset_token", "reset_token_expires","verification_token","verification_token_expires");
-        }
-        )
-        return users;
+        // const users = _users.map((user) => {
+        //     const _users = { ...user.dataValues }
+        //     return omit(_users,"password","reset_token", "reset_token_expires","verification_token","verification_token_expires");
+        // }
+        // )
+        return _users;
     }
 
     static async delete({ id }: UserInterface) {
@@ -114,7 +122,27 @@ class UserService {
         const user = await User.findOne({
             where: {
                 email
-            }
+            },
+            attributes: {
+                exclude: [
+                    "address_id",
+                    "created_at",
+                    "updated_at",
+                    "reset_password_token",
+                    "reset_password_expires",
+                    "reset_token",
+                    "reset_token_expires",
+                    "is_account_verified",
+                    "verification_token",
+                    "verification_token_expires"
+                ]
+            },
+            include: [
+                {
+                    association: "Address"
+                }
+            ]
+
         })
 
         if (!user) {
@@ -127,14 +155,14 @@ class UserService {
         });
 
         if (!is_valid) return false;
-        const _user = {...user.dataValues}
+        const _user = { ...user.dataValues }
 
-        return omit(_user,"password","reset_token", "reset_token_expires","verification_token","verification_token_expires");
+        return omit(_user, "password", "reset_token", "reset_token_expires", "verification_token", "verification_token_expires");
     }
 
-    static async avatar({url,id }: {url: string,id:string }) {
-       const user_image = User.update({
-            avatar:url
+    static async avatar({ url, id }: { url: string, id: string }) {
+        const user_image = User.update({
+            avatar: url
         },
             {
                 where: {
@@ -145,7 +173,9 @@ class UserService {
         return user_image;
     }
 }
-const filter = ["password",
+const filter = [
+    "password",
+    "address_id",
     "created_at",
     "updated_at",
     "reset_password_token",

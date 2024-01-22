@@ -1,19 +1,13 @@
 import {number, object, string, TypeOf } from "zod";
 
- const createFarmerSchema = object(
+ const createVetDoctorSchema = object(
     {
         body: object({
             user_uuid: string({
                 required_error: "User ID is required"
             }),
-            agent_uuid: string({
-                required_error: "Agent ID is required"
-            }),
-            agency_uuid: string({
+            agency_uuirund: string({
                 required_error: "Agency ID is required"
-            }),
-            plan_uuid: string({
-                required_error: "Plan ID is required"
             })
         })
     })
@@ -26,17 +20,17 @@ import {number, object, string, TypeOf } from "zod";
          })
     })
 
- const deleteFarmerSchema = object(
+ const deleteVetDoctorSchema = object(
     {
         params: object({
             user_uuid: string({
-                required_error: "Farmer ID is required"
+                required_error: "VetDoctor ID is required"
             })
         })
     })
 
 export const famerSchema={
-    createFarmerSchema,
-    deleteFarmerSchema,
+    createVetDoctorSchema,
+    deleteVetDoctorSchema,
     params
 }
