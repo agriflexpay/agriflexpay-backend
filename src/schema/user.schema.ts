@@ -1,7 +1,7 @@
 import {number, object, string, TypeOf } from "zod";
 
 
-export const userSchema = object(
+ const userSchema = object(
     {
         body: object(
             {
@@ -40,7 +40,7 @@ export const userSchema = object(
     }
 )
 
-export const params = object(
+ const params = object(
     {
         params: object(
             {
@@ -52,4 +52,24 @@ export const params = object(
     }
 )
 
+const loginSchema = object(
+    {
+        body: object(
+            {
+                email: string({
+                    required_error: "Email required"
+                }).email("Not a valid email"),
+                password: string({
+                    required_error: "Password is required"
+                }).min(6, "Password too short, should be 6 chars min"),
+            }
+        )
+    }
+)
+
+export const userSchemas = {
+    register: userSchema,
+    login: loginSchema,
+    params: params
+}
 export type CreateUserInput = Omit<TypeOf<typeof userSchema>, "passwordConfirmation">;

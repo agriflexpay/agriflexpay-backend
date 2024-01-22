@@ -160,3 +160,12 @@ export interface Plan_type{
     createdAt?: Date
     updatedAt?: Date
 }
+export interface Vet_doctor_type{
+    id?: string
+    user_uuid?: string
+    agent_uuid?: string
+    agency_uuid?: string
+    famer_uuid?: string
+    createdAt?: Date
+    updatedAt?: Date
+}

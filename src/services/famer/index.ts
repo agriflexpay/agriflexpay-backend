@@ -20,7 +20,27 @@ class FamerServices {
 
     static async getAllFarmers() {
         try {
-            const farmers = await Famer.findAll()
+            const farmers = await Famer.findAll(
+                {
+                    attributes: {
+                        exclude: filter
+                    },
+                    include: [
+                        {
+                            association: "User",
+                            attributes: {
+                                exclude: filter
+                            },
+                        },
+                        {
+                            association: "Agency"
+                        },
+                        {
+                            association: "Plan"
+                        }
+                    ]
+                }
+            )
             return farmers
         } catch (error) {
             return error
@@ -37,21 +57,14 @@ class FamerServices {
                  {
                     association: "User",
                     attributes: {
-                        exclude: ["password",
-                        "created_at",
-                        "updated_at",
-                        "reset_password_token",
-                        "reset_password_expires",
-                        "reset_token",
-                        "reset_token_expires",
-                        "is_account_verified",
-                        "verification_token",
-                        "verification_token_expires"
-                    ]
+                        exclude: filter
                     },
                  },
                  {
                     association: "Agency"
+                },
+                {
+                    association: "Plan"
                 }
 
                 ]
@@ -62,11 +75,11 @@ class FamerServices {
         }
     }
 
-    static async deleteFarmer(input: FamerType) {
+    static async deleteFarmer(user_uuid: string) {
         try {
             const farmer = await Famer.destroy({
                 where: {
-                    ...input
+                    user_uuid: user_uuid
                 }
             })
             return farmer
@@ -75,5 +88,16 @@ class FamerServices {
         }
     }
 }
-
+const filter = ["password",
+    "created_at",
+    "updated_at",
+    "address_id",
+    "reset_password_token",
+    "reset_password_expires",
+    "reset_token",
+    "reset_token_expires",
+    "is_account_verified",
+    "verification_token",
+    "verification_token_expires"
+]
 export default FamerServices;
