@@ -173,6 +173,7 @@ class Vet_DoctorServices {
                             user_uuid:user_uuid
                         }
                     })
+                    return data
                 }
             }
             return Vet_doctor

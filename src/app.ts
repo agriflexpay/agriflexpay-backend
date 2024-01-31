@@ -24,7 +24,7 @@ app.use(deserializeUser)
 app.use(express.json());
 app.use(cors(
   {
-    origin:[ 'http://localhost:5174','http://localhost:5173','http://localhost:8080','http://192.168.210.68:8080'],
+    origin:[ 'http://localhost:5174','http://localhost:5173','http://localhost:3000','http://192.168.210.68:8080','http://192.168.210.73:3000'],
     credentials: true
   }
 ));
@@ -32,7 +32,7 @@ const sequelize_auth = async (req: Request, res:Response, next: NextFunction) =>
   try {
     await sequelize_instance.authenticate().then(() => {
       //{ force: true }
-      // sequelize_instance.sync().then(() => {
+      // sequelize_instance.sync({ force: true }).then(() => {
       //   logger.info('Database Connection has been established successfully.')
        
       // }

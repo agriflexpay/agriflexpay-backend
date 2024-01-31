@@ -1,5 +1,6 @@
 export interface User_type {
     id?: string
+    agency_uuid?: string
     fname?: string
     lname?: string
     email?: string

@@ -1,10 +1,13 @@
 import { Sequelize , Model, DataTypes} from "sequelize"
 import {connection} from "../config/config"
 import address from "./address"
+import agency from "./angency"
 const Address = address(connection)
+const Agency = agency(connection)
 const user=(sequelize: Sequelize) => {
     class User extends Model {
        public id?: string
+       public agency_uuid?: string
        public fname?: string
        public lname?: string
        public email?: string
@@ -23,11 +26,21 @@ const user=(sequelize: Sequelize) => {
        public longitude?: string
        public createdAt?: Date
        public updatedAt?: Date
+
+
     }
     User.init({
         id: {
             primaryKey: true,
             type:DataTypes.UUID, 
+        },
+        agency_uuid: {
+            type: DataTypes.UUID,
+            allowNull: false,
+            references: {
+                model: "Agency",
+                key: "id",
+            },
         },
         fname: {
             type: DataTypes.STRING,
@@ -120,7 +133,20 @@ const user=(sequelize: Sequelize) => {
         sourceKey: "address_id",
         as: "Address",
       });
-     return User
+     User.hasOne(Agency, {
+            foreignKey: "id",
+            sourceKey: "agency_uuid",
+            as: "Agency",
+        });
+    // User.beforeDestroy(async (user, options) => {
+    //     await Farmer.destroy({
+    //         where: {
+    //             user_uuid: user.id
+    //         }
+    //     })
+    // }
+    // )
+    return User
 }    
 
 export default user

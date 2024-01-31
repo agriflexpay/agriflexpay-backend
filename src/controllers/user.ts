@@ -98,6 +98,18 @@ class UserController {
     //         return ResponseService.error({ res, error });
     //     }
     // }
+    static async delete(req: Request, res: Response) {
+        try {
+            const id = req.params.id;
+            const user = await UserService.delete({ id });
+            if (!user) {
+                return ResponseService.error({ res, error: "User not deleted" });
+            }
+            return ResponseService.success({ res, data: user });
+        } catch (error) {
+            return ResponseService.error({ res, error });
+        }
+    }
 }
 
 export default UserController;
