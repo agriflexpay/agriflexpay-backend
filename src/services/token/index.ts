@@ -88,7 +88,8 @@ export default class TokenService {
 
     static async generateToken({ user, res, }: { user: UserInterface, res: Response,  }) {
         try {
-            const { fname, lname, email, id, is_active } = user;
+            const { fname, lname, email, id, is_active,agency_uuid } = user;
+          
             const token = await this.sign(
                 {
                     fname,
@@ -96,7 +97,7 @@ export default class TokenService {
                     email,
                     id,
                     is_active,
-                    
+                    agency_uuid
                 }
             );
 

@@ -53,6 +53,7 @@ const user=(sequelize: Sequelize) => {
         email: {
             type: DataTypes.STRING,
             allowNull: false,
+            unique:true
         },
         national_id: {
             type: DataTypes.INTEGER,
