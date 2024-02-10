@@ -89,15 +89,37 @@ class AgentServices {
         }
     }
 
-    static async deleteAgent({ user_uuid, agency_uuid }: { user_uuid: string, agency_uuid: string }) {
+    static async deleteAgent({agent_uuid}:{agent_uuid:string}) {
         try {
+            const _transaction = await sequelize_instance.transaction()
+            const agent=  await Agent.findByPk(
+                agent_uuid,
+                {
+                    transaction: _transaction
+                }
+            )
+            const update_user = await user.update({
+                role: "4"
+            },
+                {
+                    where: {
+                        id: agent?.dataValues?.user_uuid
+                    },
+                    transaction: _transaction
+                }
+            )
+            if(update_user){
+
             const agent = await Agent.destroy({
                 where: {
-                    user_uuid: user_uuid,
-                    agency_uuid: agency_uuid
-                }
+                    id: agent_uuid
+                },
+                transaction: _transaction
             })
+            _transaction.commit()
             return agent
+            }
+            _transaction.rollback()
         } catch (error) {
             return error
         }

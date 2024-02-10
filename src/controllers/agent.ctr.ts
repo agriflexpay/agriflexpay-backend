@@ -55,8 +55,8 @@ class AgentController {
     }
     static async deleteAgent(req: Request, res: Response) {
         try {
-            const { user_uuid, agency_uuid } = req.body
-            const Agent = await AgentServices.deleteAgent({user_uuid:user_uuid,agency_uuid:agency_uuid})
+            const agent_uuid= req?.params?.agent_uuid
+            const Agent = await AgentServices.deleteAgent({agent_uuid:agent_uuid})
             if (Agent) {
                 return ResponseService.success({res,data:Agent})
             }
