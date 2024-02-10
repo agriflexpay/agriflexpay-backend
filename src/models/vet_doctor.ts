@@ -58,6 +58,8 @@ const vet_doctor=(sequelize: Sequelize) => {
     Vet_doctor.belongsTo(userModel,{foreignKey:"user_uuid"})
     Vet_doctor.belongsTo(agencyModel,{foreignKey:"agency_uuid"})
     Vet_doctor.belongsTo(agentModel,{foreignKey:"agent_uuid"})
+    //how can i show a relation between vet_doctor and famer if the famer_uuid is an array
+
     Vet_doctor.hasMany(famerModel,{foreignKey:"famer_uuid"})
 
     return Vet_doctor

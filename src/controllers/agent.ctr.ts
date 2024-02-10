@@ -20,7 +20,10 @@ class AgentController {
     }
     static async getAllAgents(req: Request, res: Response) {
         try {
-            const Agents = await AgentServices.getAllAgents()
+            const agency_uuid = res?.locals?.user?.agency_uuid;
+            const Agents = await AgentServices.getAllAgents(
+                {agency_uuid: agency_uuid}
+            )
             if (Agents) {
                 return ResponseService.success({res,data:Agents})
             }

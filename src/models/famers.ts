@@ -31,8 +31,9 @@ const famer=(sequelize: Sequelize) => {
             unique:true,
             references:{
                 model:"User",
-                key:"id"
-            }
+                key:"id",
+            },
+            
         },
         agent_uuid: {
             type: DataTypes.UUID,

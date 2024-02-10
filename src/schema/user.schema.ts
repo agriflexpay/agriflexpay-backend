@@ -1,10 +1,13 @@
-import {number, object, string, TypeOf } from "zod";
+import { number, object, string, TypeOf } from "zod";
 
 
- const userSchema = object(
+const userSchema = object(
     {
         body: object(
             {
+                agency_uuid: string({
+                    required_error: "Agency ID is required"
+                }),
                 fname: string({
                     required_error: "First Name is required"
                 }),
@@ -40,7 +43,7 @@ import {number, object, string, TypeOf } from "zod";
     }
 )
 
- const params = object(
+const params = object(
     {
         params: object(
             {

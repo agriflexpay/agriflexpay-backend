@@ -7,6 +7,10 @@ import log from "../../funct/logger";
 import { generateUUID } from "../../funct/generateId"
 import { hashPassword } from "../../funct/password";
 const User = sequelize_instance.models.User;
+const Agent = sequelize_instance.models.Agent;
+const Famers = sequelize_instance.models.Famer;
+const Vet_doctor = sequelize_instance.models.Vet_doctor;
+const Guaranter = sequelize_instance.models.Guaranter;
 interface UserInterface extends User_type { }
 class UserService {
     static async create({ ...user }: UserInterface) {
@@ -64,10 +68,13 @@ class UserService {
         return _user
     }
 
-    static async users() {
+    static async users({agency_uuid}:{agency_uuid:string}) {
         try {
             const _users = await User.findAll(
                 {
+                    where:{
+                        agency_uuid
+                    },
                     attributes: {
                         exclude: filter
                     },
@@ -108,14 +115,47 @@ class UserService {
     }
 
     static async delete({ id }: UserInterface) {
-        const _user = await User.destroy(
-            {
-                where: { id: id },
-                truncate: false
-            }
-        );
+        try{
+            const _transaction = await sequelize_instance.transaction()
+            const _famer = await Famers.destroy({
+                where:{
+                    user_uuid:id
+                },
+                transaction:_transaction
+            })
+            const _agent = await Agent.destroy({
+                where:{
+                    user_uuid:id
+                },
+                transaction:_transaction
+            })
+            const _vet = await Vet_doctor.destroy({
+                where:{
+                    user_uuid:id
+                },
+                transaction:_transaction
+            })
+            const _guaranter = await Guaranter.destroy({
+                where:{
+                    user_id:id
+                },
+                transaction:_transaction
+            })
+            
+                const _user = await User.destroy({
+                    where:{
+                        id:id
+                    },
+                    transaction:_transaction
+                })
+                await _transaction.commit()
+                return _user
+            
+        }
+        catch(error){
+            return error;
+        }
 
-        return _user;
     }
 
     static async validate_password({ email, password }: { email: string, password: string }) {
@@ -140,6 +180,9 @@ class UserService {
             include: [
                 {
                     association: "Address"
+                },
+                {   
+                    association:"Agency"
                 }
             ]
 

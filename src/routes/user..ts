@@ -9,6 +9,7 @@ const routes = (app: Express) => {
     app.get('/api/user/fetchOne/:id',requireUser, UserController.getuser)
     app.get('/api/user/fetchAll',requireUser,UserController.fetchAllUsers)
     app.put('/api/user/update/:id',requireUser,UserController.update)
+    app.delete('/api/user/delete/:id',requireUser,UserController.delete)
 }
 
 export default routes

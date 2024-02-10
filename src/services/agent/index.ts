@@ -19,14 +19,14 @@ class AgentServices {
         }
     }
 
-    static async getAllAgents() {
+    static async getAllAgents({agency_uuid}: {agency_uuid: string}) {
         try {
             const Agents = await Agent.findAll(
                 {
-                    include: [{
-                        all: true,
-                        nested: true
-                    }]
+                    where: {
+                        agency_uuid: agency_uuid
+                    },
+                    include: [user as any]
                 }
             )
             const reslt = Agents.map((agent: any) => {
