@@ -68,10 +68,13 @@ class UserService {
         return _user
     }
 
-    static async users() {
+    static async users({agency_uuid}:{agency_uuid:string}) {
         try {
             const _users = await User.findAll(
                 {
+                    where:{
+                        agency_uuid
+                    },
                     attributes: {
                         exclude: filter
                     },

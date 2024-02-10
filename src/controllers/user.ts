@@ -55,7 +55,11 @@ class UserController {
 
     static async fetchAllUsers(req:Request,res:Response){
         try{
-            const users = await UserService.users();
+            const agency_uuid = res?.locals?.user?.agency_uuid
+            console.log(agency_uuid)
+            const users = await UserService.users({
+                agency_uuid
+            });
             if(!users){
                 return ResponseService.error({res,error:"Users not found"})
             }
