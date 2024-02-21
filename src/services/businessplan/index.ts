@@ -34,7 +34,20 @@ export default class BusinessPlanService {
         })
         return _plan
     }
+    static async fetchByPlan({ plan_uuid }:{plan_uuid:string}) {
+        const _plan = await Plan.findOne({
+            where: {
+                plan_uuid: plan_uuid
+            },
+            include: [{
+                all: true,
+                nested: true
+            }]
 
+        })
+        return _plan
+    }
+    
     static async fetchAll() {
         const plans = await Plan.findAll(
             {
@@ -60,11 +73,10 @@ export default class BusinessPlanService {
         );
         return plans;
     }
-    static async delete({plan_uuid,vendor_uuid}:{plan_uuid:string,vendor_uuid:string}) {
+    static async delete({id}:{id:string}) {
         const _plan = await Plan.destroy({
             where: {
-                plan_uuid: plan_uuid,
-                vendor_uuid:vendor_uuid
+                id: id
             }
         })
         return _plan;

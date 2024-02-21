@@ -22,14 +22,10 @@ const params = object({
 })
 
 const deleteBusinessPlanSchema = object({
-    body: object({
-        vendor_uuid: string({
-            required_error: "vendor_uuid is required"
-        }),
-        plan_uuid: string({
-            required_error: "plan_uuid is required"
-        }),
-
+    params: object({
+        id: string({
+            required_error: "id is required"
+        })
     })
 })
 
@@ -40,7 +36,15 @@ const fetchByAgencySchema = object({
         })
     })
 })
+const fetchByPlanSchema = object({
+    params: object({
+        plan_uuid: string({
+            required_error: "plan_uuid is required"
+        })
+    })
+})
 export const businessPlanSchemas = {
+    fetchByPlanSchema,
     businessPlanSchema,
     params,
     fetchByAgencySchema,

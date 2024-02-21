@@ -23,7 +23,7 @@ export default class BusinessPlanController{
             const id = req.params.id;
             const businessplan = await BusinessplanService.fetch({id});
             if(!businessplan){
-                return ResponseService.error({res,error:"Business Plan not found"})
+                return ResponseService.success({res,data:"Business Plan not found"})
             }
             return ResponseService.success({res,data:businessplan})
         }
@@ -31,6 +31,20 @@ export default class BusinessPlanController{
             return ResponseService.error({res,error})
         }
     }
+    static async fetchByPlan(req:Request,res:Response){
+        try{
+            const plan_uuid = req.params.plan_uuid;
+            const businessplan = await BusinessplanService.fetchByPlan({plan_uuid});
+            if(!businessplan){
+                return ResponseService.success({res,data:"Business Plan not found"})
+            }
+            return ResponseService.success({res,data:businessplan})
+        }
+        catch(error){
+            return ResponseService.error({res,error})
+        }
+    }   
+
     static async fetchAll(req:Request,res:Response){
         try{
             const businessplans = await BusinessplanService.fetchAll();
@@ -58,8 +72,8 @@ export default class BusinessPlanController{
     }
     static async delete(req:Request,res:Response){
         try{
-            const {plan_uuid,vendor_uuid} = req.body;
-            const businessplan = await BusinessplanService.delete({plan_uuid,vendor_uuid});
+            const id = req.params.id;
+            const businessplan = await BusinessplanService.delete({id});
             if(!businessplan){
                 return ResponseService.error({res,error:"Business Plan not deleted"})
             }
