@@ -87,6 +87,23 @@ class FamerServices {
             return error
         }
     }
+    static async getMyPlans(famer_uuid: string) {
+        try {
+            const farmer = await Famer.findOne({
+                where: {
+                    user_uuid: famer_uuid
+                },
+                include: [
+                    {
+                        association: "Plan"
+                    }
+                ]
+            })
+            return farmer
+        } catch (error) {
+            return error
+        }
+    }
 }
 const filter = ["password",
     "created_at",

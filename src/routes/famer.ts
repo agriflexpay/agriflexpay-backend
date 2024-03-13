@@ -8,7 +8,7 @@ const routes = (app: Express) => {
     app.delete("/api/farmer/delete/:user_uuid",requireUser,validate(famerSchema.deleteFarmerSchema),FamerController.deleteFarmer)
     app.get("/api/farmer/get-all",requireUser,FamerController.getAllFarmers)
     app.get("/api/farmer/get-one/:user_uuid",requireUser,validate(famerSchema.params),FamerController.getOneFarmer)
-
+    app.get("/api/my-plans/:farmer_uuid",requireUser,validate(famerSchema.famer_uuid),FamerController.getMyPlans)
 
 }
 

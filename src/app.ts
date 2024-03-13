@@ -24,7 +24,7 @@ app.use(deserializeUser)
 app.use(express.json());
 app.use(cors(
   {
-    origin:[ 'http://localhost:5174','http://localhost:5173','http://localhost:3000','http://192.168.210.68:8080','http://192.168.210.73:3000'],
+    origin:[ 'http://localhost:5174','http://localhost:5173','http://localhost:3000','http://192.168.210.68:8080','https://82f7-102-0-6-134.ngrok-free.app'],
     credentials: true
   }
 ));

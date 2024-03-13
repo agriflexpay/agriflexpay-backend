@@ -25,6 +25,13 @@ import {number, object, string, TypeOf } from "zod";
               })
          })
     })
+    const famer_uuid = object({
+        params: object({
+            farmer_uuid: string({
+                required_error: "Farmer ID is required"
+            })
+        })
+    })
 
  const deleteFarmerSchema = object(
     {
@@ -38,5 +45,6 @@ import {number, object, string, TypeOf } from "zod";
 export const famerSchema={
     createFarmerSchema,
     deleteFarmerSchema,
-    params
+    params,
+    famer_uuid
 }

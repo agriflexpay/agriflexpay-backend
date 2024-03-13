@@ -56,6 +56,18 @@ class FamerController {
             return ResponseService.error({res,error})
         }
     }
+    static async getMyPlans(req: Request, res: Response) {
+        try {
+            const { farmer_uuid } = req.params
+            
+            const farmer = await FamerServices.getMyPlans(farmer_uuid)
+            if (farmer) {
+                return ResponseService.success({res,data:farmer})
+            }
+        } catch (error) {
+            return ResponseService.error({res,error})
+        }
+    }
 }
 
 export default FamerController;
