@@ -22,7 +22,6 @@ class UserService {
                 id: generateUUID(),
                 password: await hashPassword({ password: tohashpassword })
             }
-            log.info(sequelize_instance.models);
             const _user = await User.create(data);
 
             const _data = { ..._user.dataValues }
