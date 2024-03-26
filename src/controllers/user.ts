@@ -81,27 +81,27 @@ class UserController {
             return ResponseService.error({ res, error });
         }
     }
-    // static async uploadAvatar(req: Request, res: Response) {
-    //     try {
-    //         const id = res?.locals?.user?.id;
+    static async uploadAvatar(req: Request, res: Response) {
+        try {
+            const id = res?.locals?.user?.id;
 
-    //         if (!req?.body?.file) {
-    //             return ResponseService.error({ res, error: "Image not attached" });
-    //         }
-    //         const user = await UserService.uploadAvatar({file: req?.body?.file });
+            if (!req?.body?.file) {
+                return ResponseService.error({ res, error: "Image not attached" });
+            }
+            const user = await UserService.uploadAvatar({file: req?.body?.file });
             
-    //             if(!user){
-    //                 return ResponseService.error({ res, error: "Image not uploaded" });
-    //             }
-    //         const _user = await UserService.avatar({url:user.usersecure_url ?? '',id });
-    //         if (!_user) {
-    //             return ResponseService.error({ res, error: "Image url not saved" });
-    //         }
-    //         return ResponseService.success({ res, data: user });
-    //     } catch (error) {
-    //         return ResponseService.error({ res, error });
-    //     }
-    // }
+                if(!user){
+                    return ResponseService.error({ res, error: "Image not uploaded" });
+                }
+            const _user = await UserService.avatar({url:user.usersecure_url ?? '',id });
+            if (!_user) {
+                return ResponseService.error({ res, error: "Image url not saved" });
+            }
+            return ResponseService.success({ res, data: user });
+        } catch (error) {
+            return ResponseService.error({ res, error });
+        }
+    }
     static async delete(req: Request, res: Response) {
         try {
             const id = req.params.id;

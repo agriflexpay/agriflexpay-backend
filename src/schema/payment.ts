@@ -14,6 +14,9 @@ const payment_Schema = object(
                 transactionDesc: string({
                     required_error: "Transaction Description is required"
                 }),
+                paybill: number({
+                    required_error: "Paybill is required"
+                }),
             }
         )
     })

@@ -4,6 +4,7 @@ import { User_type } from "../../types/type"
 import sequelize_instance from "../../models/index";
 import { comparePassword } from "../../funct/password";
 import log from "../../funct/logger";
+import { uploader } from "../../funct/uploader";    
 import { generateUUID } from "../../funct/generateId"
 import { hashPassword } from "../../funct/password";
 const User = sequelize_instance.models.User;
@@ -214,6 +215,15 @@ class UserService {
         )
         return user_image;
     }
+
+    static async uploadAvatar({ file }: { file: any }) {
+        const image = await uploader({
+            file: file?.path
+        });
+
+        return image;
+    }
+
 }
 const filter = [
     "password",

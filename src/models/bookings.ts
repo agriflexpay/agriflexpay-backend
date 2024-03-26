@@ -1,35 +1,25 @@
 import { Sequelize,DataTypes,Model  } from "sequelize";
+import plan from './businesplan'
+import user from "./user"
+import {connection }from "../config/config"
 
-
-const payment=(sequelize: Sequelize) => {
-    class Payment extends Model{
-        public code?: string
-        public amount?: number
-        public paymentMode?: string
+const userModel = user(connection)
+const planModel = plan(connection)
+const bookings=(sequelize: Sequelize) => {
+    
+    class Bookings extends Model{
+        public id?: string
         public user_id?: string
         public plan_uuid?: string
         public vendor_uuid?: string
-        public phone?: number
         public createdAt?: Date
         public updatedAt?: Date
     }
 
-    Payment.init({
+    Bookings.init({
         id: {
             primaryKey: true,
             type:DataTypes.UUID, 
-        },
-        code: {
-            primaryKey: true,
-            type: DataTypes.STRING,
-        },
-        amount: {
-            type: DataTypes.DOUBLE,
-            allowNull: false,
-        },
-        paymentMode: {
-            type: DataTypes.STRING,
-            allowNull: false,
         },
         user_uuid: {
             type: DataTypes.UUID,
@@ -55,18 +45,16 @@ const payment=(sequelize: Sequelize) => {
                 key: "id",
             },
         },
-        phone:{
-            type: DataTypes.STRING,
-            allowNull: false,
-        }
         
     },{
         sequelize,
-        modelName:"Payment",
-        tableName:"Payment",
+        modelName:"Bookings",
+        tableName:"Bookings",
         timestamps: true
     })
 
-    return Payment
+    Bookings.hasOne(userModel,{foreignKey:"user_uuid"})
+    Bookings.hasOne(planModel,{foreignKey:"plan_uuid"})
+    return Bookings
 }
-export default payment
+export default bookings
