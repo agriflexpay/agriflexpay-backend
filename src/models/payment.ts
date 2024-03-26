@@ -58,7 +58,11 @@ const payment=(sequelize: Sequelize) => {
         phone:{
             type: DataTypes.STRING,
             allowNull: false,
-        }
+        },
+        description: {
+            type: DataTypes.STRING,
+            allowNull: false,
+        },
         
     },{
         sequelize,

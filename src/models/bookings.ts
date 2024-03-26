@@ -25,7 +25,7 @@ const bookings=(sequelize: Sequelize) => {
             type: DataTypes.UUID,
             allowNull: false,
             references: {
-                model: "User",
+                model: "Famer",
                 key: "id",
             },
         },
@@ -53,8 +53,8 @@ const bookings=(sequelize: Sequelize) => {
         timestamps: true
     })
 
-    Bookings.hasOne(userModel,{foreignKey:"user_uuid"})
-    Bookings.hasOne(planModel,{foreignKey:"plan_uuid"})
+    Bookings.hasOne(userModel,{foreignKey:"id"})
+    Bookings.hasOne(planModel,{foreignKey:"id"})
     return Bookings
 }
 export default bookings

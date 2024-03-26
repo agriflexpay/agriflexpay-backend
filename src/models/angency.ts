@@ -42,6 +42,10 @@ const agency = (sequelize: Sequelize) => {
                 key: "id",
             },
         },
+        avatar: {
+            type: DataTypes.STRING,
+            allowNull: true,
+        },
     }, {
         sequelize:sequelize,
         modelName: "Agency",

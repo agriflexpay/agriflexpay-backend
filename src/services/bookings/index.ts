@@ -1,7 +1,7 @@
 import sequelize_instance from "../../models/index"
 
 import { generateUUID } from "../../funct/generateId";
-const Bookings = sequelize_instance.models.Plan
+const Bookings = sequelize_instance.models.Bookings
 
 
 export default class BookingsService {
