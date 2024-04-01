@@ -2,8 +2,9 @@ import { Sequelize,DataTypes,Model  } from "sequelize";
 import plan from './businesplan'
 import user from "./user"
 import {connection }from "../config/config"
-
+import famer from "./famers";
 const userModel = user(connection)
+const farmerModel = famer(connection)
 const planModel = plan(connection)
 const bookings=(sequelize: Sequelize) => {
     
@@ -53,8 +54,8 @@ const bookings=(sequelize: Sequelize) => {
         timestamps: true
     })
 
-    Bookings.hasOne(userModel,{foreignKey:"id"})
-    Bookings.hasOne(planModel,{foreignKey:"id"})
+    Bookings.belongsTo(farmerModel,{foreignKey:"user_uuid"})
+    Bookings.belongsTo(planModel,{foreignKey:"plan_uuid"})
     return Bookings
 }
 export default bookings

@@ -1,4 +1,3 @@
-
 import { omit } from "lodash";
 import { Agent_type } from "../../types/type"
 import sequelize_instance from "../../models/index";
