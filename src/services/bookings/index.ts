@@ -2,6 +2,19 @@ import sequelize_instance from "../../models/index"
 
 import { generateUUID } from "../../funct/generateId";
 const Bookings = sequelize_instance.models.Bookings
+const filter = ["password",
+    "created_at",
+    "address_id",
+    "updated_at",
+    "reset_password_token",
+    "reset_password_expires",
+    "reset_token",
+    "reset_token_expires",
+    "is_account_verified",
+    "verification_token",
+    "verification_token_expires"
+]
+
 
 
 export default class BookingsService {
@@ -52,8 +65,9 @@ export default class BookingsService {
         const plans = await Bookings.findAll(
             {
                 include: [{
-                    all: true,
-                    nested: true
+                        association: "User",
+                        attributes: {
+                            exclude: filter}
                 }]
             }
         );
@@ -81,9 +95,16 @@ export default class BookingsService {
                     vendor_uuid: vendor_uuid
                 },
                 include: [{
-                    all: true,
-                    nested: true
-                }]
+                    association: "User",
+                        attributes: {
+                            exclude: filter}
+                },
+                {
+                    association: "Plan"
+                   
+                },
+               
+            ]
             }
         );
         return plans;

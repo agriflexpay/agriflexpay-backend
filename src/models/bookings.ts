@@ -27,7 +27,7 @@ const bookings=(sequelize: Sequelize) => {
             allowNull: false,
             references: {
                 model: "Famer",
-                key: "id",
+                key: "user_uuid",
             },
         },
         plan_uuid: {
@@ -54,7 +54,7 @@ const bookings=(sequelize: Sequelize) => {
         timestamps: true
     })
 
-    Bookings.belongsTo(farmerModel,{foreignKey:"user_uuid"})
+    Bookings.belongsTo(userModel,{foreignKey:"user_uuid"})
     Bookings.belongsTo(planModel,{foreignKey:"plan_uuid"})
     return Bookings
 }
