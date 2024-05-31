@@ -100,8 +100,11 @@ export default class BookingsService {
                             exclude: filter}
                 },
                 {
-                    association: "Plan"
-                   
+                    association: "Plan",
+                    include:[{
+                        all:true,
+                        nested:true
+                    }]
                 },
                
             ]
