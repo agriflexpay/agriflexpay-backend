@@ -26,7 +26,7 @@ const bookings=(sequelize: Sequelize) => {
             type: DataTypes.UUID,
             allowNull: false,
             references: {
-                model: "Famer",
+                model: "Farmer",
                 key: "user_uuid",
             },
         },

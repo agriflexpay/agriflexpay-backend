@@ -10,7 +10,7 @@ const agencyModel = agency(connection)
 const agentModel = agent(connection)
 const planModel = plan(connection)
 const famer=(sequelize: Sequelize) => {
-    class Famer extends Model {
+    class Farmer extends Model {
         public id?: string
         public user_uuid?: string
         public agent_uuid?: string
@@ -20,7 +20,7 @@ const famer=(sequelize: Sequelize) => {
         public updatedAt?: Date
     }
 
-    Famer.init({
+    Farmer.init({
         id: {
             primaryKey: true,
             type:DataTypes.UUID, 
@@ -63,15 +63,15 @@ const famer=(sequelize: Sequelize) => {
     },
      {
         sequelize,
-        modelName: 'Famer',
+        modelName: 'Farmer',
         tableName: 'Farmer',
         timestamps: true
     })
-    Famer.belongsTo(userModel,{foreignKey:"user_uuid"})
-    Famer.belongsTo(agencyModel,{foreignKey:"agency_uuid"})
-    Famer.belongsTo(agentModel,{foreignKey:"agent_uuid"})
-    Famer.belongsTo(planModel,{foreignKey:"plan_uuid"})
+    Farmer.belongsTo(userModel,{foreignKey:"user_uuid"})
+    Farmer.belongsTo(agencyModel,{foreignKey:"agency_uuid"})
+    Farmer.belongsTo(agentModel,{foreignKey:"agent_uuid"})
+    Farmer.belongsTo(planModel,{foreignKey:"plan_uuid"})
 
-return Famer
+return Farmer
 }
 export default famer
