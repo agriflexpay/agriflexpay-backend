@@ -26,7 +26,7 @@ app.use(deserializeUser)
 app.use(express.urlencoded({ extended: true }));
 app.use(cors(
   {
-    origin:[ 'http://localhost:5174','http://localhost:5173','http://localhost:3000','https://better-years-smile.loca.lt','https://9cb3-102-0-6-134.ngrok-free.app','http://127.0.0.1:5173'],
+    origin:[ 'http://127.0.0.1:3000'],
     credentials: true
   }
 ));

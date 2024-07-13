@@ -17,11 +17,19 @@ const address=(sequelize: Sequelize) => {
             primaryKey: true,
             type: DataTypes.UUID,
         },
+        country:{
+            type: DataTypes.STRING,
+            allowNull: false,
+        },
         county: {
             type: DataTypes.STRING,
             allowNull: false,
         },
-        subcounty: {
+        sub_county: {
+            type: DataTypes.STRING,
+            allowNull: false,
+        },
+        ward:{
             type: DataTypes.STRING,
             allowNull: false,
         },
@@ -29,11 +37,11 @@ const address=(sequelize: Sequelize) => {
             type: DataTypes.STRING,
             allowNull: false,
         },
-        sublocation: {
+        sub_location: {
             type: DataTypes.STRING,
             allowNull: false,
         },
-        phone: {
+        village:{
             type: DataTypes.STRING,
             allowNull: false,
         }
