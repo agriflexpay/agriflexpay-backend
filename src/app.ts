@@ -24,12 +24,7 @@ const port = process.env.PORT
 app.use(express.json())
 app.use(deserializeUser)
 app.use(express.urlencoded({ extended: true }));
-app.use(cors(
-  {
-    origin:[ 'http://127.0.0.1:3000'],
-    credentials: true
-  }
-));
+app.use(cors());
 const sequelize_auth = async (req: Request, res:Response, next: NextFunction) => {
   try {
     await sequelize_instance.authenticate().then(() => {
