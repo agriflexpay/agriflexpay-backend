@@ -39,6 +39,7 @@ const plan  = (sequelize: Sequelize) => {
     sequelize: sequelize,
     modelName: "Plan",
     tableName: "Plan",
+    freezeTableName: true,
     timestamps: true,
 })
 Plan.belongsTo(agencyModel,{foreignKey:"vendor_uuid"})

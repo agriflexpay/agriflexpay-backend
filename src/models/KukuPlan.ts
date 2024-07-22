@@ -106,6 +106,7 @@ const kukuplan  = (sequelize: Sequelize) => {
 }, {
     sequelize: sequelize,
     modelName: "KukuPlan",
+    freezeTableName: true,
     tableName: "kukuPlan",
 })
 return KukuPlan

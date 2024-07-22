@@ -128,6 +128,7 @@ const user=(sequelize: Sequelize) => {
         sequelize,
         modelName: "User",
         tableName: "User",
+        freezeTableName: true,
         timestamps: true,
      }
       )

@@ -17,44 +17,44 @@ const disease = (sequelize: Sequelize) => {
         public updatedAt?: Date
     }
     Diseace.init({
-        id:{
+        id: {
             primaryKey: true,
             type: DataTypes.UUID,
             defaultValue: DataTypes.UUID,
         },
-        name:{
+        name: {
             type: DataTypes.STRING,
             allowNull: false,
         },
-        occurance_pattern:{
+        occurance_pattern: {
             type: DataTypes.JSONB,
             allowNull: false,
         },
-        causes:{
+        causes: {
             type: DataTypes.JSONB,
             allowNull: false,
         },
-        prevention_and_control:{
+        prevention_and_control: {
             type: DataTypes.JSONB,
             allowNull: false,
         },
-        transmission:{
+        transmission: {
             type: DataTypes.JSONB,
             allowNull: false,
         },
-        signs_and_symptoms:{
+        signs_and_symptoms: {
             type: DataTypes.JSONB,
             allowNull: false,
         },
-        treatment:{
+        treatment: {
             type: DataTypes.JSONB,
             allowNull: false,
         },
-        victim:{
+        victim: {
             type: DataTypes.JSONB,//affected animals or plants 
             allowNull: false,
         },
-        location_id:{
+        location_id: {
             type: DataTypes.UUID,
             allowNull: false,
             references: {
@@ -62,19 +62,20 @@ const disease = (sequelize: Sequelize) => {
                 key: 'id'
             }
         },
-        farmer_id:{
+        farmer_id: {
             type: DataTypes.UUID,
             allowNull: true,
         },
-        image:{
+        image: {
             type: DataTypes.STRING,
             allowNull: true,
         }
     },
         {
             sequelize: sequelize,
-             modelName: "Disease",
-             tableName: "Disease"
+            modelName: "Disease",
+            freezeTableName: true,
+            tableName: "Disease"
         }
     )
     return Diseace

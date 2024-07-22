@@ -51,7 +51,9 @@ const bookings=(sequelize: Sequelize) => {
         sequelize,
         modelName:"Bookings",
         tableName:"Bookings",
-        timestamps: true
+        timestamps: true,
+        freezeTableName: true,
+
     })
 
     Bookings.belongsTo(userModel,{foreignKey:"user_uuid"})

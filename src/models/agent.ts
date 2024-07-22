@@ -44,6 +44,7 @@ const agent=(sequelize: Sequelize) => {
         sequelize,
         tableName: 'Agent',
         modelName: 'Agent',
+        freezeTableName: true,
         timestamps: true
     })
     Agent.belongsTo(userModel,{foreignKey:"user_uuid"})

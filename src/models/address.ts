@@ -48,6 +48,7 @@ const address=(sequelize: Sequelize) => {
     },{
         sequelize: sequelize,
         tableName: "Address",
+        freezeTableName: true,
         modelName: "Address",
     })
 

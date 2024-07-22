@@ -68,6 +68,7 @@ const payment=(sequelize: Sequelize) => {
         sequelize,
         modelName:"Payment",
         tableName:"Payment",
+        freezeTableName: true,
         timestamps: true
     })
 

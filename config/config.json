@@ -1,0 +1,23 @@
+{
+    "development": {
+      "username": "dqncimrp",
+      "password": "RwNb8iT6zO87gEXymk15ezngpZvBxdRe",
+      "database": "dqncimrp",
+      "host": "raja.db.elephantsql.com",
+      "dialect": "postgres"
+    },
+    "test": {
+        "username": "**",
+        "password": "**",
+        "database": "**",
+        "host": "raja.db.elephantsql.com",
+        "dialect": "postgres"
+    },
+    "production": {
+        "username": "**",
+        "password": "**",
+        "database": "**",
+        "host": "raja.db.elephantsql.com",
+        "dialect": "postgres"
+    }
+  }

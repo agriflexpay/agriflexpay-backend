@@ -53,6 +53,7 @@ const vet_doctor=(sequelize: Sequelize) => {
         sequelize,
         modelName: 'Vet_doctor',
         tableName: 'Vet_doctor',
+        freezeTableName: true,
         timestamps: true
     })
     Vet_doctor.belongsTo(userModel,{foreignKey:"user_uuid"})

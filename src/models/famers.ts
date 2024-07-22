@@ -65,6 +65,7 @@ const famer=(sequelize: Sequelize) => {
         sequelize,
         modelName: 'Farmer',
         tableName: 'Farmer',
+        freezeTableName: true,
         timestamps: true
     })
     Farmer.belongsTo(userModel,{foreignKey:"user_uuid"})

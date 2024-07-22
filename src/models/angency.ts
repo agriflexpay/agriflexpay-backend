@@ -50,6 +50,7 @@ const agency = (sequelize: Sequelize) => {
         sequelize:sequelize,
         modelName: "Agency",
         tableName: "Agency",
+        freezeTableName: true,
         timestamps: true,
     })
     return Agency

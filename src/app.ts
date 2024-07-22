@@ -17,6 +17,7 @@ import agentRoutes from './routes/agent.routes'
 import verDoctorRoutes from './routes/vet_doctor'
 import PaymentRoutes from './routes/payment'
 import BookingsRoutes from './routes/bookings'
+import ReistrionRoutes from './routes/registration'
 dotenv.config()
 const app = express()
 
@@ -61,4 +62,5 @@ app.listen(port, () => {
   verDoctorRoutes(app)
   PaymentRoutes(app)
   BookingsRoutes(app)
+  ReistrionRoutes(app)
 })

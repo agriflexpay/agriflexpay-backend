@@ -58,6 +58,7 @@ const guaranter=(sequelize: Sequelize) => {
     },{
         sequelize,
         modelName: "Guaranter",
+        freezeTableName: true,
         tableName: "Guaranter"
     })
 return Guaranter
